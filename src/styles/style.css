@@ -54,7 +54,7 @@ video {
 /*---- THEME : BLUE ----*/
 .navbar-default {
     /*background-color: #279ddd;*/
-	background-color: #8BBBBB;
+	background-color: #248f8f;
     color: #fff;
     opacity: 1;
 }
@@ -68,7 +68,7 @@ video {
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
     color: #ffffff;
     /*background-color: #0B73AB;*/
-    background-color: #477E7E;
+    background-color: #007a7a;
 
 }
 
@@ -82,7 +82,7 @@ video {
 
 #section2 {
    /* background-color: #5F5F5F;*/
-   background-color: #AEEAEA;
+   background-color: #33CCCC;
     color: #686868;
 /*    padding: 5px 0;*/
     border-radius: 4px;
@@ -110,3 +110,42 @@ video {
 .col-md-6 {
     padding-left: 0;
 }
+
+
+/*==============Search Options===========*/
+.pgm-form-search {
+	background-color:#2Eb8b8;
+}
+
+.pgm-form-search .search-title {
+    color:#FFFFFF;
+}
+.pgm-form-search .search-submit-btn {
+	background-color: #477E7E;color:#ffffff;font-weight:bold;
+}
+
+.search-results .search-results-title{
+	background-color:#33CCCC;
+}
+.search-results .search-results-container{
+	max-height: 400px; overflow:auto;
+}
+.search-results .search-results-item{
+	padding-top:10px;padding:bottom:10px;
+}
+
+.search-results .search-results-item-title{
+	padding-left:50px;
+}
+
+.search-results-pgm-info .pgm-info-title {
+	background-color:#47d1d1;
+}
+
+.search-results-pgm-info .pgm-image-container {
+	background-color:#33CCCC
+}
+.search-results-pgm-info .pgm-image {
+	background-color:#47d1d1
+}
+

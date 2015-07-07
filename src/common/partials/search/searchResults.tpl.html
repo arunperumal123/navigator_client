@@ -1,32 +1,29 @@
-<section id="section6">
-    <div class="col-md-6">
-         <div class="list-group">
-            <a href="#" class="list-group-item active" style= 'background-color:#33CCCC'>
-               <h2 class="list-group-item-heading" >Program Info</h2>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Title: {{programInfo.Title}}</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Category: {{programInfo.Category}}</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Duration: {{programInfo.Duration}}</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Airing Time: {{programInfo.AiringTime}}</p>
-            </a>
-	    <a href="#" class="list-group-item">
-                <p class="list-group-item-text">TV Rating: {{programInfo.TVRating}}</p>
-            </a>
-         </div>
-     </div>
-
-    <div class="col-md-6">
-        <div class="list-group" style= 'background-color:#33CCCC'>
-            <a href="#" class="list-group-item active" style= 'background-color:#33CCCC'>
-                <img ng-src="/dist/assets/posters/poster-2.jpg" width="100%" />
-            </a>
-        </div>
-    </div>
+<section id="section5">
+	<div class='search-results' ng-if= "searchData">
+		<a href="#" class="list-group-item active search-results-title">
+		   <h4 class="list-group-item-heading" >Search Results</h4>
+		</a>
+		<div ng-if= "searchData">
+			<div class="search-results-container">
+				<div class="col-md-12" ng-repeat="programList in searchData">
+					<a ui-sref=".searchResultsInfo({aTime:programList.Programs['AiringTime'] , pid: programList.Programs['ProgramId']})" class="list-group-item search-results-item" >
+						<img width="50" height="50" ng-src="{{programList.channelImage}}" />
+						<span class="search-results-item-title">
+							{{programList.Programs.Title}}
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div ng-if="searchData.length==0">
+		<a class="list-group-item">
+			No search results found...
+        </a>
+	</div>
 </section>
+
+<br/>
+<div ui-view></div>
+
+</div>
