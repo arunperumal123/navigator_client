@@ -10,35 +10,26 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         views: {
         '@':   { templateUrl: 'templates/partials/tabs.tpl.html',
                  controller: function () {
-
-/* COMMENT BY ARUN                     settings_manager.getLastLcn(function(lcn) {
-                         log.error('First Play');
-                         getLcn(lcn);
-                     }); */
-
                      //Setting focus to 'View By Channel' Tab on page display
                      $('#byChannel').focus();
-
-
                      // Play a video initially
                     // VideoPlayer.play("http://192.168.0.50:8080/vldms/tuner?ocap_locator=ocap://0x26");
-                 }
                 }
+            }
         }
     });
 
     // ViewByChannel tab
     states.push({   name: 'tabs.bychannel',
         url: 'channels',
-        views: { 'channeltab':
-                    { templateUrl: 'templates/partials/channel/channel.tpl.html'}
-        },
-        resolve: { foo: function() {
-                        console.log("resolving 'foo' for tabs.viewbychannel");
-                        return "foo"; }
-        },
-        deepStateRedirect: true,
-        sticky: true
+        views: 
+		    { 'channeltab':
+	            { 
+		            templateUrl: 'templates/partials/channel/channel.tpl.html'
+				}
+            },
+            deepStateRedirect: true,
+            sticky: true
     });
 
     states.push({ name: 'tabs.bychannel.channellist',
@@ -66,31 +57,39 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         templateUrl: 'templates/partials/channel/programCarousel.tpl.html'
     });
 
-
     states.push({ name: 'tabs.bychannel.channellist.channel.programInfo',
         url: '/programInfo/:pid',
         controller: 'programController',
-        templateUrl: 'templates/partials/programInfo.tpl.html'
+        templateUrl: 'templates/partials/channel/programInfo.tpl.html'
     });
 
-    // ViewByTime tab
+    // search tab
     states.push({   name: 'tabs.search',
-        url: 'search',
-        views: { 'searchtab@tabs':
-        { templateUrl: 'templates/partials/search/searchCarousel.tpl.html'}
-        },
-	controller: 'searchController',
-        resolve: { foo: function() {
-            console.log("resolving 'foo' for tabs.search");
-            return "foo"; 
-			}
-        }/*,
-        deepStateRedirect: true,
-        sticky: true*/
+        url: 'search/',
+        views: 
+			{ 'searchtab@tabs':
+				{ 
+					templateUrl: 'templates/partials/search/searchCarousel.tpl.html'
+				}
+            },
+	controller: 'searchController'
     });
 
-
-    states.push({ name: 'tabs.search.searchResultsInfo',
+    // search results tab
+    states.push({   name: 'tabs.search.results',
+        url: 'search/results/:title',
+        templateUrl: 'templates/partials/search/searchResults.tpl.html',
+	    controller: 'searchResultsController',
+        resolve: { 
+	    searchData: ['$stateParams', 'data', function($stateParams, data){
+                if ($stateParams.title) {			
+                    return data.getSearchResult($stateParams.title);
+                }
+            }]
+        },
+    });
+	
+    states.push({ name: 'tabs.search.results.searchResultsInfo',
         url: '/searchResultsInfo/:pid/:aTime',
         controller: 'searchResultsInfoController',
 		resolve:{
@@ -100,29 +99,11 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
                 }
             }]
         },
-        templateUrl: 'templates/partials/search/searchResults.tpl.html'
+        templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
     });
     angular.forEach(states, function(state) { $stateProvider.state(state); });
 
     $urlRouterProvider.otherwise("/");
-
-
-
-  /**
-   * OLD CODE to be removed
-   * $urlRouterProvider.otherwise("/guide");
-
-  $stateProvider
-    .state('guide', {
-      url: "/guide",
-      templateUrl: "templates/guide/guide.tpl.html",
-      resolve: {
-        channelData: function (data) {          
-          return getChannelList();
-        }
-      },
-      controller: 'guideController'
-    });*/
 });
 
 cloudStbApp.run(function ($rootScope, $state, $window, $timeout, EventManagerService, KeyHandlerService) {
@@ -130,7 +111,7 @@ cloudStbApp.run(function ($rootScope, $state, $window, $timeout, EventManagerSer
     $rootScope.$on("$stateChangeSuccess", function() {});
 
     //Initialize the Keyboard Service
-   /* EventManagerService.init();
+    /*EventManagerService.init();
 
     EventManagerService.on(function (key, evt) {
         KeyHandlerService.move(key, evt);

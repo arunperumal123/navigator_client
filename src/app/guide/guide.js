@@ -3,6 +3,7 @@ cloudStbApp.controller('channelController', ['$scope', 'channelData', '$timeout'
     // Service IDs i.e. channel Ids
     var channelList = channelData.data;
 	
+	//Test code to replace the image path with local path. Shouldbe removed once gets the actauls data
     for(var i=0; i<channelList.length; i++) {
 		var channelObj= channelList[i];
 		var channelImage =(channelObj.channelImage).replace("http://172.28.11.54/epg/image_icon/","/dist/assets/channels_logo/");
@@ -12,10 +13,12 @@ cloudStbApp.controller('channelController', ['$scope', 'channelData', '$timeout'
     $scope.channelList = channelList;
 
     //VideoPlayer.play('192.168.0.33/epg/WebKit.mp4');
+    //VideoPlayer.play('http://localhost:5000/src/assets/posters/sample-1.mp4');
+    VideoPlayer.pause();
 
 }]);
 
-cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'twitter', function ($scope, data, $stateParams, programList, twitter) {
+cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , function ($scope, data, $stateParams, programList, VideoPlayer) {
 
    // var _videoURL;
       var _channelIndex;
@@ -44,6 +47,7 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
             //_videoURL = "http://172.28.95.150:8080/vldms/tuner?ocap_locator=ocap://0x27";
             _channelIndex = 5;
         }
+        VideoPlayer.pause();
 
         /*  VideoPlayer.play(_videoURL);*/
        // VideoPlayer.play('192.168.0.33/epg/WebKit.mp4');
@@ -74,58 +78,49 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
 
                 $scope.programInfo = _programInfo;
             }
-        });
-
-        //Read the twits against a program #hashTag
-        /*twitter.getTwits(_programInfo.Title).then(function (response) {
-            $scope.twits = response.data.tData;
-
-        }, function (error) {
-
-        });*/
-    }
-
-    //Tweet the current program
-    /*$scope.sendTweet = function () {
-        twitter.sendTweets(_programInfo.Title).then(function (response) {
-            console.log(response);
-        }, function (err) {
-            console.log(err);
-        });
-    };*/
-
+        });       
+    } 
 }]);
-cloudStbApp.controller('searchController', ['$scope','data', '$stateParams', function ($scope,data, $stateParams) {
+cloudStbApp.controller('searchController', ['$scope','data', '$stateParams', '$state' , function ($scope,data, $stateParams, $state) {
 
     $scope.search = function () {
 		if($scope.keywords.length<3){
 			alert("Please enter atleast 3 characters for searching program");
 			return;
 		}
-		var searchReq = data.getSearchResult($scope.keywords);
-		searchReq.success(function(data, status, headers, config) {  
-			//alert(data.length);
-			
-			   for(var i=0; i<data.length; i++) {
-					var programObj= data[i];
-					var channelImage =(programObj.channelImage).replace("http://172.28.11.54/epg/image_icon/","/dist/assets/channels_logo/");
-					programObj.channelImage = channelImage;
-					data[i]=programObj;
-				}
-			$scope.searchData = data;
-
-	  });
+		$state.go("tabs.search.results",{'title':$scope.keywords});
 	};
 }]);
 
-cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$stateParams', 'programDetails', 'twitter', function ($scope, data, $stateParams, programDetails, twitter) {
+
+cloudStbApp.controller('searchResultsController', ['$scope', 'data', '$stateParams', 'searchData', 'VideoPlayer', function ($scope, data, $stateParams, searchData, VideoPlayer) {
+
+	var searchDataDt = searchData.data;
+	//Test code to replace the image path with local path. Shouldbe removed once gets the actauls data
+	for(var i=0; i<searchDataDt.length; i++) {
+		var programObj= searchDataDt[i];
+		var channelImage =(programObj.channelImage).replace("http://172.28.11.54/epg/image_icon/","/dist/assets/channels_logo/");
+		programObj.channelImage = channelImage;
+		searchDataDt[i]=programObj;
+	}
+	$scope.searchData = searchDataDt;
+	if(searchDataDt.length == 0){
+		VideoPlayer.pause();
+	}
+}]);
+
+cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$stateParams', 'programDetails', 'VideoPlayer', function ($scope, data, $stateParams, programDetails, VideoPlayer) {
 
 	var _programInfo = {};
 	$scope.programDetails= programDetails.data;
+	
+	
+	var imgList = new Array("poster-1.jpg", "poster-2.jpg", "poster-3.jpg", "poster-4.jpg", "poster-5.jpg");
+	var img = imgList[Math.floor(Math.random()*imgList.length)];
+
     // If ProgramId exists then, we can traverse programList to find Program Info for that particular id
     if ($stateParams.pid) {
         var _programList =  $scope.programDetails;
-
         angular.forEach(_programList, function(singleProgram, key) {
             if (singleProgram.Programs['ProgramId'] === $stateParams.pid) {
 
@@ -138,17 +133,13 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$state
                 _programInfo.AiringTime = singleProgram.Programs['AiringTime'];
                 _programInfo.Dolby = singleProgram.Programs['Dolby'];
                 _programInfo.Stereo = singleProgram.Programs['Stereo'];
-
+				_programInfo.img= img;
+				
                 $scope.programInfo = _programInfo;
             }
         });
-
+		var videoList = new Array("sample-1.mp4", "sample-2.mp4", "sample-3.mp4", "sample-4.mp4", "sample-5.mp4", "sample-6.mp4");
+		var video = videoList[Math.floor(Math.random()*videoList.length)];
+		VideoPlayer.play('http://localhost:5000/dist/assets/posters/'+video);
     }
 }]);
-/*
-cloudStbApp.controller('searchController', ['$scope', 'searchData', '$timeout', function ($scope, searchData, $timeout) {
-alert('searchController');
-    // Service IDs i.e. channel Ids
-    var channelList = $scope.searchData;
-
-}]);*/
