@@ -2,7 +2,9 @@ cloudStbApp.controller('channelController', ['$scope', 'channelData', '$timeout'
 
     // Service IDs i.e. channel Ids
     var channelList = channelData.data;
+
 	
+	/*
 	//Test code to replace the image path with local path. Shouldbe removed once gets the actauls data
     for(var i=0; i<channelList.length; i++) {
 		var channelObj= channelList[i];
@@ -10,10 +12,11 @@ cloudStbApp.controller('channelController', ['$scope', 'channelData', '$timeout'
 		channelObj.channelImage = channelImage;
 		channelList[i]=channelObj;
     }
-    $scope.channelList = channelList;
-
+*/
     //VideoPlayer.play('192.168.0.33/epg/WebKit.mp4');
     //VideoPlayer.play('http://localhost:5000/src/assets/posters/sample-1.mp4');
+	    $scope.channelList = channelList;
+
     VideoPlayer.pause();
 
 }]);
@@ -142,4 +145,17 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$state
 		var video = videoList[Math.floor(Math.random()*videoList.length)];
 		VideoPlayer.play('http://localhost:5000/dist/assets/posters/'+video);
     }
+}]);
+
+cloudStbApp.controller('loginController', ['$scope','data', '$stateParams', '$state' , function ($scope,data, $stateParams, $state) {
+
+    $scope.login = function () {
+		alert($scope.username);
+		alert($scope.password);
+		if($scope.keywords.length<3){
+			alert("Please enter atleast 3 characters for searching program");
+			return;
+		}
+		$state.go("tabs.search.results",{'title':$scope.keywords});
+	};
 }]);

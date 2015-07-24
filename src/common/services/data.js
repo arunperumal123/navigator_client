@@ -1,5 +1,5 @@
-var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
-//var serverUrl = "http://localhost:9080/";
+//var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
+var serverUrl = "http://localhost:9080/";
 
 cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 
@@ -24,7 +24,7 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
   }
 
   // Fetches Program Data for a particular channel based on start and end time
-  function getProgramList(sourceID) {
+  function getProgramList(channelNo) {
       /*
       * Hard coding for now but userStartTime and userEndTime will be variable in local time zone
       *
@@ -44,7 +44,7 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
       var userStartTime = '2015-04-27T00:00:00Z',
           userEndTime = '2015-04-27T20:30:00Z';
 
-      var _url = serverUrl+'epg/programs?user=rovi&sourceId=' + sourceID + '&userStartTime=' + userStartTime + '&userEndTime=' + userEndTime;
+      var _url = serverUrl+'epg/programs?user=rovi&channelNo=' + channelNo + '&userStartTime=' + userStartTime + '&userEndTime=' + userEndTime;
 
       return $http({method: 'GET', url: _url});
   }

@@ -101,6 +101,20 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         },
         templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
     });
+
+    // search tab
+    states.push({   name: 'tabs.login',
+        url: 'login/',
+        views: 
+			{ 'logintab@tabs':
+				{ 
+					templateUrl: 'templates/partials/login/login.tpl.html'
+				}
+            },
+	controller: 'loginController'
+    });
+
+
     angular.forEach(states, function(state) { $stateProvider.state(state); });
 
     $urlRouterProvider.otherwise("/");
