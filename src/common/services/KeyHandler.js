@@ -29,7 +29,7 @@ cloudStbApp.service('KeyHandlerService', ['$state', '$stateParams', function ($s
             _hash = _target.hash,
             _isChannelClicked = $(_target).hasClass('channelCarousel'),
             _isProgramClicked = $(_target).hasClass('programCarousel');
-alert($(_target).className);
+alert($(_target).class);
         var _data = _hash.split('/'),
             _dataLength = _data.length,
             _param = _data[_dataLength - 1];

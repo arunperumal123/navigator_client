@@ -1,29 +1,29 @@
-<section id="section3">
+<section id="section3" class = 'search-results-pgm-info'>
     <div class="col-md-6">
          <div class="list-group">
             <a href="#" class="list-group-item active" style= 'background-color:#33CCCC'>
                <h2 class="list-group-item-heading" >Program Info</h2>
             </a>
             <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Title: {{programInfo.Title}}</p>
+                <p class="list-group-item-text">Title: {{programInfo.title}}</p>
             </a>
             <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Category: {{programInfo.Category}}</p>
+                <p class="list-group-item-text">Genre: {{programInfo.genre}}</p>
             </a>
             <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Duration: {{programInfo.Duration}}</p>
+                <p class="list-group-item-text">Duration: {{programInfo.duration}}</p>
             </a>
             <a href="#" class="list-group-item">
-                <p class="list-group-item-text">AiringTime: {{programInfo.AiringTime}}</p>
+                <p class="list-group-item-text">Cast: {{programInfo.cast}}</p>
             </a>
          </div>
      </div>
 
-    <div class="col-md-6">
-        <div class="list-group" style= 'background-color:#33CCCC'>
-            <a href="#" class="list-group-item active" style= 'background-color:#33CCCC'>
-                <img ng-src="/dist/assets/posters/poster-1.jpg" width="100%" />
-            </a>
+   <div class="col-md-6">
+        <div class="list-group" class= 'pgm-image-container'>
+            <span class="list-group-item active pgm-image">
+                <img ng-src="/dist/assets/posters/{{programInfo.img}}" width="100%" />
+            </span>
         </div>
     </div>
 </section>

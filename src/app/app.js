@@ -59,7 +59,15 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 
     states.push({ name: 'tabs.bychannel.channellist.channel.programInfo',
         url: '/programInfo/:pid',
-        controller: 'programController',
+        controller: 'programInfoController',
+		resolve:{
+            programList: ['$stateParams', 'data', function($stateParams, data){
+                if ($stateParams.pid) {
+                    // Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
+                    return data.getProgramDetails($stateParams.pid);
+                }
+            }]
+        },
         templateUrl: 'templates/partials/channel/programInfo.tpl.html'
     });
 

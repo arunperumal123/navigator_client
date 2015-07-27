@@ -1,10 +1,8 @@
 <div class="navbar navbar-default navbar-static-top" role="navigation">
     <ul class="nav navbar-nav">
         <li ng-class="{active: $state.includes('tabs.bychannel')}" ><a ui-sref="tabs.bychannel.channellist" tabindex="1" id="byChannel">Channel List</a></li>
-        <li ng-class="{active: $state.includes('tabs.search')}" ><a ui-sref="tabs.search" tabindex="2">Search Program</a></li>
-        <li ng-class="{active: $state.includes('tabs.login')}" ><a ui-sref="tabs.login" tabindex="3">Login</a></li>
+        <li ng-class="{active: $state.includes('tabs.search')}" ><a ui-sref="tabs.search" tabindex="2">Search</a></li>
     </ul>
 </div>
 <div class="tabcontent" ui-view="channeltab" ng-show="$state.includes('tabs.bychannel')"></div>
 <div class="tabcontent" ui-view="searchtab" ng-show="$state.includes('tabs.search')"></div>
-<div class="tabcontent" ui-view="logintab" ng-show="$state.includes('tabs.login')"></div>

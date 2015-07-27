@@ -46,8 +46,10 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
 
       if (key) {
         // An interesting key was pressed
-        evt.preventDefault();
-        self._handleKeyEvent(key, evt);
+		if(!evt.target.nodeName.toUpperCase() == 'INPUT') {
+			evt.preventDefault();
+			self._handleKeyEvent(key, evt);
+		}
       }
     });
   };

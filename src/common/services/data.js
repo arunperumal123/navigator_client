@@ -32,7 +32,7 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
       var dt = new Date();
       var utcUserStartTime = dt.toISOString();
       var endTime = new Date();
-      endTime.setHours(23, 59, 59, 999);
+      endTime.setDate(endTime.getDate()+1);
       var utcUserEndTime = endTime.toISOString();
       
 var userStartTime = utcUserStartTime;
@@ -47,15 +47,26 @@ var userEndTime = utcUserEndTime;
 
       return $http({method: 'GET', url: _url});
   }
+  
+    // Fetches Program Data for a particular channel based on start and end time
+  function getProgramDetails(pgmID) {
+
+
+      var _url = serverUrl+'epg/programInfo?user=rovi&pgmId=' + pgmID;
+
+      return $http({method: 'GET', url: _url});
+  }
+  
+  
   function getSearchResult(searchString){
 	var _url = serverUrl+'epg/search?user=rovi&title='+searchString;
 	return $http({method: 'GET', url: _url});
   }
 
-  function getProgramDetails(programID, airingTime){
+  /*function getProgramDetails(programID, airingTime){
 	var _url = serverUrl+'epg/program?user=rovi&id='+programID+"&airingTime="+airingTime;
 	return $http({method: 'GET', url: _url});  
-  }
+  }*/
   
   return {
     getChannelList: getChannelList,

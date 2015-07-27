@@ -72,33 +72,43 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
 
         //playMyChannel(_channelIndex);
     }
-
-    var _programInfo = {};
-
+}]);
+cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , function ($scope, data, $stateParams, programList, VideoPlayer) {
+        var singleProgram = programList.data;
+	
+	var imgList = new Array("poster-1.jpg", "poster-2.jpg", "poster-3.jpg", "poster-4.jpg", "poster-5.jpg");
+	var img = imgList[Math.floor(Math.random()*imgList.length)];
+	
+   var _programInfo = {};
     // If ProgramId exists then, we can traverse programList to find Program Info for that particular id
     if ($stateParams.pid) {
-        var _programList =  $scope.programList;
-
-       // var _programInfo = {};
-
-        angular.forEach(_programList, function(singleProgram, key) {
-            if (singleProgram.Programs['ProgramId'] === $stateParams.pid) {
-
+           // if (singleProgram['program_id'] === $stateParams.pid) {
                 //Store the Program Title in scope to be accessed in 'Tweet' Button click
-                _programInfo.Title = $scope.currentProgramTitle = singleProgram.Programs['Title'];
-                _programInfo.Category = singleProgram.Programs['Category'];
-                _programInfo.Duration = singleProgram.Programs['Duration'];
-                _programInfo.Subcategory = singleProgram.Programs['Subcategory'];
-                _programInfo.TVRating = singleProgram.Programs['TVRating'];
-                _programInfo.AiringTime = singleProgram.Programs['AiringTime'];
-                _programInfo.Dolby = singleProgram.Programs['Dolby'];
-                _programInfo.Stereo = singleProgram.Programs['Stereo'];
+                _programInfo.audioType = singleProgram['audio_type'];
+                _programInfo.cast = singleProgram['cast'];
+
+                _programInfo.title = $scope.currentProgramTitle = singleProgram['title'];
+                _programInfo.genre = singleProgram['genre'];
+				
+				var startTime = new Date(singleProgram['start_time']);
+				var endTime = new Date(singleProgram['end_time']);
+				var difference = Math.abs( ((endTime.getTime()- startTime.getTime()) / (3600*1000)) );		
+				_programInfo.duration =  (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour';
+				
+				/*
+                _programInfo.Duration = singleProgram['Duration'];
+                _programInfo.Subcategory = singleProgram['Subcategory'];
+                _programInfo.TVRating = singleProgram['TVRating'];
+                _programInfo.AiringTime = singleProgram['AiringTime'];
+                _programInfo.Stereo = singleProgram['Stereo'];*/
+				_programInfo.img = img;
 
                 $scope.programInfo = _programInfo;
+							
             }
-        });       
-    } 
+    
 }]);
+
 cloudStbApp.controller('searchController', ['$scope','data', '$stateParams', '$state' , function ($scope,data, $stateParams, $state) {
 
     $scope.search = function () {
@@ -115,12 +125,12 @@ cloudStbApp.controller('searchResultsController', ['$scope', 'data', '$statePara
 
 	var searchDataDt = searchData.data;
 	//Test code to replace the image path with local path. Shouldbe removed once gets the actauls data
-	for(var i=0; i<searchDataDt.length; i++) {
+	/*for(var i=0; i<searchDataDt.length; i++) {
 		var programObj= searchDataDt[i];
 		var channelImage =(programObj.channelImage).replace("http://172.28.11.54/epg/image_icon/","/dist/assets/channels_logo/");
 		programObj.channelImage = channelImage;
 		searchDataDt[i]=programObj;
-	}
+	}*/
 	$scope.searchData = searchDataDt;
 	if(searchDataDt.length == 0){
 		VideoPlayer.pause();
@@ -138,24 +148,19 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$state
 
     // If ProgramId exists then, we can traverse programList to find Program Info for that particular id
     if ($stateParams.pid) {
-        var _programList =  $scope.programDetails;
-        angular.forEach(_programList, function(singleProgram, key) {
-            if (singleProgram.Programs['ProgramId'] === $stateParams.pid) {
-
+        var singleProgram =  $scope.programDetails;
                 //Store the Program Title in scope to be accessed in 'Tweet' Button click
-                _programInfo.Title = $scope.currentProgramTitle = singleProgram.Programs['Title'];
-                _programInfo.Category = singleProgram.Programs['Category'];
-                _programInfo.Duration = singleProgram.Programs['Duration'];
-                _programInfo.Subcategory = singleProgram.Programs['Subcategory'];
-                _programInfo.TVRating = singleProgram.Programs['TVRating'];
-                _programInfo.AiringTime = singleProgram.Programs['AiringTime'];
-                _programInfo.Dolby = singleProgram.Programs['Dolby'];
-                _programInfo.Stereo = singleProgram.Programs['Stereo'];
-				_programInfo.img= img;
-				
-                $scope.programInfo = _programInfo;
-            }
-        });
+                _programInfo.audioType = singleProgram['audio_type'];
+                _programInfo.cast = singleProgram['cast'];
+
+                _programInfo.title = $scope.currentProgramTitle = singleProgram['title'];
+                _programInfo.genre = singleProgram['genre'];
+				_programInfo.img = img;
+				var startTime = new Date(singleProgram['start_time']);
+				var endTime = new Date(singleProgram['end_time']);
+				var difference = Math.abs( ((endTime.getTime()- startTime.getTime()) / (3600*1000)) );		
+				_programInfo.duration =  (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour';
+			$scope.programInfo = _programInfo;	
 		var videoList = new Array("sample-1.mp4", "sample-2.mp4", "sample-3.mp4", "sample-4.mp4", "sample-5.mp4", "sample-6.mp4");
 		var video = videoList[Math.floor(Math.random()*videoList.length)];
 		VideoPlayer.play('http://localhost:5000/dist/assets/posters/'+video);
