@@ -1,10 +1,10 @@
 <section id="section1">
-    <div slick-slider="{dots: false, arrows: TRUE, draggable: false, slidesToScroll:3,slidesToShow:5, infinite:false}">
+    <div  slick-slider="{dots: false, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false}">
 	
         <div class="my-slide" ng-repeat="channel in channelList">
 		
 			<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel">
-				<div style='text-align:center;'>
+				<div style='text-align:center;;background-color:#33CCCC;margin:5px;padding:5px;'>
 					<div> Channel {{channel.channel_number}}</div>
 					<div>{{channel.channel_name}}</div>
 				</div>

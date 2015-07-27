@@ -125,9 +125,9 @@ cloudStbApp.run(function ($rootScope, $state, $window, $timeout, EventManagerSer
     $rootScope.$on("$stateChangeSuccess", function() {});
 
     //Initialize the Keyboard Service
-    /*EventManagerService.init();
+    EventManagerService.init();
 
     EventManagerService.on(function (key, evt) {
         KeyHandlerService.move(key, evt);
-    });*/
+    });
 });

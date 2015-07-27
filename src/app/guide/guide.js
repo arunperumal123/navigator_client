@@ -29,7 +29,22 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
     // Access the source id from url
     if ($stateParams.cid) {
         // Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
-        $scope.programList = programList.data;
+        var pgmDataObj = programList.data;
+		
+    for(var i=0; i<pgmDataObj.length; i++) {
+		var pgmData = pgmDataObj[i];
+		//alert(pgmData.start_time);
+		//alert(pgmData.end_time);
+		var startDate = new Date(pgmData.start_time );
+		var endDate = new Date(pgmData.end_time);
+				pgmData.pgmTime = startDate.getHours()+":"+startDate.getMinutes()+"-"+endDate.getHours()+":"+endDate.getMinutes();
+				pgmData.pgmDay = startDate.getDate();
+				//alert('pgmData.pgmTime ='+pgmData.pgmTime );
+				//alert('pgmData.pgmDay ='+pgmData.pgmDay );
+			pgmDataObj[i] = pgmData;	
+		}
+		
+		$scope.programList = pgmDataObj;
 
         /*
          * Following Code block will be removed later. Here we are hard coding program ID patterns with

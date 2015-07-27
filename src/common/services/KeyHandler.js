@@ -8,7 +8,12 @@ cloudStbApp.service('KeyHandlerService', ['$state', '$stateParams', function ($s
             case 'enter':
                 ENTER_KEY_EventsHandler (evt);
                 break;
-
+			case 'left':
+				LEFT_KEY_EventsHandler(evt);
+                break;
+			case 'menu':
+				 MENU_KEY_EventsHandler(evt);
+                break;				
             default:
                 break;
         }
@@ -20,16 +25,14 @@ cloudStbApp.service('KeyHandlerService', ['$state', '$stateParams', function ($s
      *
      * */
     function ENTER_KEY_EventsHandler (evt) {
-
         var _target = evt.target,
             _hash = _target.hash,
             _isChannelClicked = $(_target).hasClass('channelCarousel'),
             _isProgramClicked = $(_target).hasClass('programCarousel');
-
+alert($(_target).className);
         var _data = _hash.split('/'),
             _dataLength = _data.length,
             _param = _data[_dataLength - 1];
-
         if (_isChannelClicked) {
             // If Channel Link is Clicked
             $state.go('tabs.bychannel.channellist.channel',  { "cid": _param });
@@ -44,12 +47,19 @@ cloudStbApp.service('KeyHandlerService', ['$state', '$stateParams', function ($s
     }
 
     /**
+     * The following function for handling 'ENTER' events
+     *
+     * */
+    function MENU_KEY_EventsHandler (evt) {
+        $state.go('tabs');
+	}
+    /**
      * The following function for handling 'LEFT' events
      *
      * */
 
      function LEFT_KEY_EventsHandler () {
-
+		//alert('LEFT_KEY_EventsHandler');
      }
     /**
      * The following function for handling 'RIGHT' events
@@ -57,7 +67,7 @@ cloudStbApp.service('KeyHandlerService', ['$state', '$stateParams', function ($s
      * */
 
     function RIGHT_KEY_EventsHandler () {
-
+		//alert('RIGHT_KEY_EventsHandler');
     }
 
   }]);

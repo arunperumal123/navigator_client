@@ -6,16 +6,24 @@
         </div>
     </div>
 	-->
-    <div slick-slider="{dots: false, arrows: TRUE, draggable: false, slidesToScroll:3,slidesToShow:5, infinite:false}">
+    <div slick-slider="{dots: true, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false}">
 	
-        <div class="my-slide" ng-repeat="program in programList ">
+        <div class="my-slide pgm-grid" ng-repeat="program in programList" style='margin:5px;background:#33CCCC;;padding:5px;'>
 		
-			<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
+			<!--<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
 				<div style='text-align:center;'>
 					<div>  {{program.title}} </div>
 					<div>cast({{program.cast}} )</div>
-					<div>From: {{program.start_time}} </div>
-					<div>To:{{program.end_time}} </div>
+					<div>Time: {{program.pgmTime}} </div>
+					<div>Day:{{program.pgmDay}} </div>
+				</div>
+
+			</a>-->
+			<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
+				<div style='text-align:center;'>
+					<div style='border-bottom:4px solid #ffffff;padding-left:10px;padding-right:10px;'>{{program.pgmTime}} </div>
+					
+					<div style='height:70px;vertical-align:middle;padding-top:15px;'>  {{program.title}} </div>
 				</div>
 
 			</a>
