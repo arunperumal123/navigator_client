@@ -94,7 +94,9 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 				var endTime = new Date(singleProgram['end_time']);
 				var difference = Math.abs( ((endTime.getTime()- startTime.getTime()) / (3600*1000)) );		
 				_programInfo.duration =  (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour';
-				
+				_programInfo.audioType=singleProgram['audio_type'];
+				_programInfo.pgmTime = startTime.getHours()+":"+startTime.getMinutes()+"-"+endTime.getHours()+":"+endTime.getMinutes();
+				_programInfo.pgmDay = startTime.getDate();				
 				/*
                 _programInfo.Duration = singleProgram['Duration'];
                 _programInfo.Subcategory = singleProgram['Subcategory'];
@@ -156,11 +158,15 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$state
                 _programInfo.title = $scope.currentProgramTitle = singleProgram['title'];
                 _programInfo.genre = singleProgram['genre'];
 				_programInfo.img = img;
+				_programInfo.audioType=singleProgram['audio_type'];
 				var startTime = new Date(singleProgram['start_time']);
 				var endTime = new Date(singleProgram['end_time']);
 				var difference = Math.abs( ((endTime.getTime()- startTime.getTime()) / (3600*1000)) );		
 				_programInfo.duration =  (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour';
+				_programInfo.pgmTime = startTime.getHours()+":"+startTime.getMinutes()+"-"+endTime.getHours()+":"+endTime.getMinutes();
+				_programInfo.pgmDay = startTime.getDate();	
 			$scope.programInfo = _programInfo;	
+			
 		var videoList = new Array("sample-1.mp4", "sample-2.mp4", "sample-3.mp4", "sample-4.mp4", "sample-5.mp4", "sample-6.mp4");
 		var video = videoList[Math.floor(Math.random()*videoList.length)];
 		VideoPlayer.play('http://localhost:5000/dist/assets/posters/'+video);

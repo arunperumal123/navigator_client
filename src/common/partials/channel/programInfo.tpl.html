@@ -1,27 +1,36 @@
 <section id="section3" class = 'search-results-pgm-info'>
     <div class="col-md-6">
          <div class="list-group">
-            <a href="#" class="list-group-item active" style= 'background-color:#33CCCC'>
-               <h2 class="list-group-item-heading" >Program Info</h2>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Title: {{programInfo.title}}</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Genre: {{programInfo.genre}}</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Duration: {{programInfo.duration}}</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <p class="list-group-item-text">Cast: {{programInfo.cast}}</p>
-            </a>
+            <span class="list-group-item active" style= 'background-color:#33CCCC'>
+               <h4 class="list-group-item-heading" >Program Info</h4>
+			</span>
+ 				<p class="list-group-item">
+					<span class="list-group-item-text">Title: {{programInfo.title}}</span>
+				</p>
+				<p class="list-group-item">
+					<span class="list-group-item-text">Genre: {{programInfo.genre}}</span>
+				</p>
+				<p class="list-group-item">
+					<span class="list-group-item-text">Airing Time: {{programInfo.pgmTime}}</span>
+				</p>				
+				<p class="list-group-item">
+					<span class="list-group-item-text">Duration: {{programInfo.duration}}</span>
+				</p>
+				<p class="list-group-item">
+					<span class="list-group-item-text">Cast: {{programInfo.cast}}</span>
+				</p>
+				<p class="list-group-item">
+					<span class="list-group-item-text">Audio Type: {{programInfo.audioType}}</span>
+				</p>
+				<p class="list-group-item">
+					<span class="list-group-item-text">Airing Day: {{programInfo.pgmDay}}</span>
+				</p>	
          </div>
      </div>
 
    <div class="col-md-6">
         <div class="list-group" class= 'pgm-image-container'>
-            <span class="list-group-item active pgm-image">
+            <span class="list-group-item  pgm-image">
                 <img ng-src="/dist/assets/posters/{{programInfo.img}}" width="100%" />
             </span>
         </div>

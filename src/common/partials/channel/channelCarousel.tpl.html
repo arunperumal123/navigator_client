@@ -4,7 +4,7 @@
         <div class="my-slide" ng-repeat="channel in channelList">
 		
 			<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel" style="border-radius:10px;">
-				<div style='text-align:center;;background-color:#33CCCC;margin:5px;padding:5px;'>
+				<div style='text-align:center;;background-color:#33CCCC;margin:5px;padding:5px;' id="channel_container_{{channel.channel_number}}">
 					<div> Channel {{channel.channel_number}}</div>
 					<div>{{channel.channel_name}}</div>
 				</div>
