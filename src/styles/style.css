@@ -22,7 +22,7 @@ body {
     background: #fff;
 }
 
-video {
+video#bgvid {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -149,3 +149,7 @@ video {
 	background-color:#47d1d1
 }
 
+.slick-prev:before, .slick-next:before { 
+    color:#2Eb8b8 !important;
+	font-weight:bold;
+}

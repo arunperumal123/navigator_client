@@ -1,5 +1,7 @@
-//var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
-var serverUrl = "http://localhost:9080/";
+var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
+//var serverUrl = "http://localhost:9080/";
+var currentDate = new Date();
+var channelDay = currentDate.toISOString().substr(0,10);
 
 cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 
@@ -21,6 +23,32 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
     });
 
     return deferred.promise;
+  }
+
+ // Fetches Program Data for a particular channel based on start and end time
+  function getDayProgramList(channelNo, day) {
+      /*
+      * Hard coding for now but userStartTime and userEndTime will be variable in local time zone
+      */
+	  
+      var dt = new Date(day);
+	  dt.setDate(dt.getDate());
+      var utcUserStartTime = dt.toISOString();
+      var endTime = new Date(day);
+      endTime.setDate(dt.getDate()+1);
+      var utcUserEndTime = endTime.toISOString();
+      
+var userStartTime = utcUserStartTime;
+var userEndTime = utcUserEndTime;
+      //var startEndTime = datetime.UTCLocalTimeConversion();
+
+      // Replace hard coded value with the properties in 'startEndTime' object
+      //var userStartTime = '2015-04-27T00:00:00Z',
+        //userEndTime = '2015-04-27T20:30:00Z';
+
+      var _url = serverUrl+'epg/programs?user=rovi&channelNo=' + channelNo + '&pgmStartTime=' + userStartTime + '&pgmEndTime=' + userEndTime;
+
+      return $http({method: 'GET', url: _url});
   }
 
   // Fetches Program Data for a particular channel based on start and end time
@@ -73,7 +101,8 @@ var userEndTime = utcUserEndTime;
     getProgramList: getProgramList,
     getProgramInfo: getProgramInfo,
     getSearchResult: getSearchResult,
-	getProgramDetails: getProgramDetails
+	getProgramDetails: getProgramDetails,
+	getDayProgramList:getDayProgramList
   }
 
 }]);

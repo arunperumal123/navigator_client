@@ -19,18 +19,43 @@ cloudStbApp.controller('channelController', ['$scope', 'channelData', '$timeout'
 
     VideoPlayer.pause();
 
+	//<div ng-controller="channelController">
+
+
 }]);
 
-cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , function ($scope, data, $stateParams, programList, VideoPlayer) {
+cloudStbApp.controller('channelControllerAction', ['$scope', 'data', '$stateParams', '$state', function ($scope, data, $stateParams, $state) {
+	
+    $scope.dayPlus = function () {
+		var nextDay = new Date(channelDay);
+		nextDay.setDate(nextDay.getDate()+1);
+        channelDay = nextDay.toISOString().substr(0,10);
 
+		$state.go("tabs.bychannel.channellist.channel",{'day':channelDay});
+	};
+
+    $scope.dayMinus = function () {
+		var prevDay = new Date(channelDay);
+		prevDay.setDate(prevDay.getDate()-1);
+		 channelDay = prevDay.toISOString().substr(0,10);
+		$state.go("tabs.bychannel.channellist.channel",{'day':channelDay});
+	};
+	
+}]);
+
+cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , 'programDate' , function ($scope, data, $stateParams, programList,  VideoPlayer, programDate) {
+//cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , function ($scope, data, $stateParams, programList, VideoPlayer) {
    // var _videoURL;
       var _channelIndex;
+	var _programDate = {};
+	_programDate.date = programDate;
+$scope.programDate = _programDate;
 
     // Access the source id from url
     if ($stateParams.cid) {
         // Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
         var pgmDataObj = programList.data;
-		
+		$scope.programDate=programList.programDate;
     for(var i=0; i<pgmDataObj.length; i++) {
 		var pgmData = pgmDataObj[i];
 		//alert(pgmData.start_time);
@@ -65,13 +90,14 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
             //_videoURL = "http://172.28.95.150:8080/vldms/tuner?ocap_locator=ocap://0x27";
             _channelIndex = 5;
         }
-        VideoPlayer.pause();
+        //VideoPlayer.pause();
 
         /*  VideoPlayer.play(_videoURL);*/
        // VideoPlayer.play('192.168.0.33/epg/WebKit.mp4');
 
         //playMyChannel(_channelIndex);
     }
+
 }]);
 cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , function ($scope, data, $stateParams, programList, VideoPlayer) {
         var singleProgram = programList.data;
@@ -80,6 +106,7 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 	var img = imgList[Math.floor(Math.random()*imgList.length)];
 	
    var _programInfo = {};
+
     // If ProgramId exists then, we can traverse programList to find Program Info for that particular id
     if ($stateParams.pid) {
            // if (singleProgram['program_id'] === $stateParams.pid) {
@@ -96,7 +123,8 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 				_programInfo.duration =  (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour';
 				_programInfo.audioType=singleProgram['audio_type'];
 				_programInfo.pgmTime = startTime.getHours()+":"+startTime.getMinutes()+"-"+endTime.getHours()+":"+endTime.getMinutes();
-				_programInfo.pgmDay = startTime.getDate();				
+				_programInfo.pgmDay = startTime.toISOString().substr(0,10);
+
 				/*
                 _programInfo.Duration = singleProgram['Duration'];
                 _programInfo.Subcategory = singleProgram['Subcategory'];
@@ -105,8 +133,21 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
                 _programInfo.Stereo = singleProgram['Stereo'];*/
 				_programInfo.img = img;
 
+
                 $scope.programInfo = _programInfo;
-							
+/*				var chObj = document.getElementById("channel_container_"+singleProgram['channel_index']);
+				if(chObj) {
+					chObj.style.backgroundColor='red';	
+					chObj.innerHTML='ccccccc';
+				}*/
+		var videoList = new Array("sample-1.mp4", "sample-2.mp4", "sample-3.mp4", "sample-4.mp4", "sample-5.mp4", "sample-6.mp4");
+		var video = videoList[Math.floor(Math.random()*videoList.length)];
+		
+		var videoElement = document.getElementById('bgvid-1');
+			if(!videoElement) return;
+           videoElement.src = 'http://localhost:8080/dist/assets/posters/'+video;
+           videoElement.load();
+           videoElement.play();
             }
     
 }]);
@@ -164,12 +205,18 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$state
 				var difference = Math.abs( ((endTime.getTime()- startTime.getTime()) / (3600*1000)) );		
 				_programInfo.duration =  (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour';
 				_programInfo.pgmTime = startTime.getHours()+":"+startTime.getMinutes()+"-"+endTime.getHours()+":"+endTime.getMinutes();
-				_programInfo.pgmDay = startTime.getDate();	
-			$scope.programInfo = _programInfo;	
+				_programInfo.pgmDay = startTime.toISOString().substr(0,10);
+				$scope.programInfo = _programInfo;	
 			
 		var videoList = new Array("sample-1.mp4", "sample-2.mp4", "sample-3.mp4", "sample-4.mp4", "sample-5.mp4", "sample-6.mp4");
 		var video = videoList[Math.floor(Math.random()*videoList.length)];
-		VideoPlayer.play('http://localhost:5000/dist/assets/posters/'+video);
+		
+		var videoElement = document.getElementById('bgvid-1');
+			if(!videoElement) return;
+           videoElement.src = 'http://localhost:8080/dist/assets/posters/'+video;
+           videoElement.load();
+           videoElement.play();
+		//VideoPlayer.play('http://localhost:8080/dist/assets/posters/'+video);
     }
 }]);
 

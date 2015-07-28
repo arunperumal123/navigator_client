@@ -1,5 +1,5 @@
 <section id="section1">
-    <div  slick-slider="{dots: false, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false}">
+    <div  slick-slider="{dots: false, arrows: true, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false, focusOnSelect:true}">
 	
         <div class="my-slide" ng-repeat="channel in channelList">
 		
@@ -10,6 +10,9 @@
 				</div>
 
 			</a>
+			
+
+
             <!--<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel"><img width="140" height="140" ng-src="{{channel.channel_logo_id}}" /></a>-->
 			
         </div>

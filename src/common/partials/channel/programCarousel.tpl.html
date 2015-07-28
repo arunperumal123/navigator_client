@@ -6,31 +6,46 @@
         </div>
     </div>
 	-->
-    <div slick-slider="{dots: true, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false}">
-	
-        <div class="my-slide pgm-grid" ng-repeat="program in programList" style='margin:5px;background:#33CCCC;;padding:5px;border-radius:10px;' id="channel_container_{{program.program_id}}}">
-		
-			<!--<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
-				<div style='text-align:center;'>
-					<div>  {{program.title}} </div>
-					<div>cast({{program.cast}} )</div>
-					<div>Time: {{program.pgmTime}} </div>
-					<div>Day:{{program.pgmDay}} </div>
-				</div>
 
-			</a>-->
-			<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
-				<div style='text-align:center;'>
-					<div style='border-bottom:4px solid #ffffff;padding-left:10px;padding-right:10px;'>{{program.pgmTime}} </div>
-					
-					<div style='height:70px;vertical-align:middle;padding-top:15px;'>  {{program.title}} </div>
-				</div>
-
-			</a>
-            <!--<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel"><img width="140" height="140" ng-src="{{channel.channel_logo_id}}" /></a>-->
 			
-        </div>
-    </div>
+	<div ng-if="programList.length>0">
+
+		<div slick-slider="{dots: true, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false}">
+		
+			<div class="my-slide pgm-grid" ng-repeat="program in programList" style='margin:5px;background:#33CCCC;padding:5px;border-radius:10px;' id="channel_container_{{program.program_id}}}">
+			
+				<!--<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
+					<div style='text-align:center;'>
+						<div>  {{program.title}} </div>
+						<div>cast({{program.cast}} )</div>
+						<div>Time: {{program.pgmTime}} </div>
+						<div>Day:{{program.pgmDay}} </div>
+					</div>
+
+				</a>-->
+				<a ui-sref=".programInfo({pid: program.program_id})" class="channelCarousel">
+					<div style='text-align:center;'>
+						<div style='border-bottom:4px solid #ffffff;padding-left:10px;padding-right:10px;'>{{program.pgmTime}} </div>
+						
+						<div style='height:70px;vertical-align:middle;padding-top:15px;'>  {{program.title}} </div>
+					</div>
+
+				</a>
+				<!--<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel"><img width="140" height="140" ng-src="{{channel.channel_logo_id}}" /></a>-->
+				
+			</div>
+		</div>
+	</div>
+	<div ng-if="programList.length==0">
+		<span class="list-group-item" style='font-weight:bold;background:#33CCCC;color:#ffffff;padding:20px;'>
+			No epg data available... Please try for different date...
+        </span>
+	</div>
+		<div>{{programDate.date}}</div>
+			<div ng-controller="channelControllerAction">
+				<button style= 'font-weight:bold;width:100px;height:30px;color:#ffffff;background-color:#33CCCC;border-radius:10px;margin:10px;margin-top:10px;float:right;' type="submit" ng-click="dayPlus()" class ="btn search-submit-btn">Day +</button>
+				<button style= 'font-weight:bold;width:100px;height:30px;color:#ffffff;background-color:#33CCCC;border-radius:10px;margin:10px;margin-top:10px;float:right;' type="submit" ng-click="dayMinus()" class ="btn search-submit-btn">Day -</button>
+			</div><br/><br/>
 </section>
 
 <div ui-view></div>
