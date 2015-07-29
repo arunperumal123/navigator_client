@@ -7,21 +7,34 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
     * */
 
   var UP    = 'up',
-      RIGHT = 'right',
+      //RIGHT = 'right',
       DOWN  = 'down',
-      LEFT  = 'left',
+      //LEFT  = 'left',
       ENTER = 'enter',
       CHANNEL_UP = 'channel_up',
-      CHANNEL_DOWN = 'channel_down';
+      CHANNEL_DOWN = 'channel_down',
+	  MENU = 'menu',
+	  SETTINGS = 'settings',
+	  GUIDE = 'guide',
+	  EXIT = 'exit';
+	  
 
   var keyboardMap = {
-    37: LEFT,
+   // 37: LEFT,
     38: UP,
-    39: RIGHT,
+   // 39: RIGHT,
     40: DOWN,
     13: ENTER,
     427: CHANNEL_UP,
-    428: CHANNEL_DOWN
+    428: CHANNEL_DOWN,
+	77: MENU,//M
+	83 :SETTINGS,//s
+	27: EXIT, //escape
+	/*33:pageup,
+	34:pagedown,
+	9:TAB,*/
+	71:GUIDE//G
+	//48-57,
   };
 
   // Initialize the keyboard event binding
@@ -33,8 +46,10 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
 
       if (key) {
         // An interesting key was pressed
-        evt.preventDefault();
-        self._handleKeyEvent(key, evt);
+		if(!evt.target.nodeName.toUpperCase() == 'INPUT') {
+			evt.preventDefault();
+			self._handleKeyEvent(key, evt);
+		}
       }
     });
   };
@@ -61,6 +76,5 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
   this.on = function(cb) {
     this.keyEventHandlers.push(cb);
   };
-
 
 }]);
