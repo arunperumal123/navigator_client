@@ -10,7 +10,7 @@
 			
 	<div ng-if="programList.length>0">
 
-		<div slick-slider="{dots: true, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false}">
+		<div slick-slider="{dots: true, arrows: TRUE, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false, focusOnSelect:true}">
 		
 			<div class="my-slide pgm-grid" ng-repeat="program in programList" style='margin:5px;background:#33CCCC;padding:5px;border-radius:10px;' id="channel_container_{{program.program_id}}}">
 			
