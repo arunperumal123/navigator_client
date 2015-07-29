@@ -70,7 +70,15 @@ $scope.programDate = _programDate;
 		}
 		
 		$scope.programList = pgmDataObj;
-
+				if(selectedChannel){
+					var oldChObj = document.getElementById("channel_container_"+selectedChannel);
+					if(oldChObj){
+						oldChObj.style.backgroundColor = '#33CCCC';	
+					}
+					var chObj = document.getElementById("channel_container_"+$stateParams.cid);
+					chObj.style.backgroundColor = '#477E7E';	
+				}
+				selectedChannel = $stateParams.cid;
         /*
          * Following Code block will be removed later. Here we are hard coding program ID patterns with
          * Video URLs.
@@ -134,7 +142,8 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 				_programInfo.img = img;
 
 
-                $scope.programInfo = _programInfo;
+				$scope.programInfo = _programInfo;
+
 /*				var chObj = document.getElementById("channel_container_"+singleProgram['channel_index']);
 				if(chObj) {
 					chObj.style.backgroundColor='red';	
@@ -148,7 +157,18 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
            videoElement.src = 'http://localhost:8080/dist/assets/posters/'+video;
            videoElement.load();
            videoElement.play();
+		   
+				if(selectedChannel){
+					var oldChObj = document.getElementById("channel_container_"+selectedChannel);
+					if(oldChObj){
+						oldChObj.style.backgroundColor = '#33CCCC';	
+					}
+					var chObj = document.getElementById("channel_container_"+singleProgram['channel_index']);
+					chObj.style.backgroundColor = '#477E7E';	
+				}
+				selectedChannel = singleProgram['channel_index'];
             }
+			
     
 }]);
 
