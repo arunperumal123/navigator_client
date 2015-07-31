@@ -18,7 +18,6 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
 	  GUIDE = 'guide',
 	  EXIT = 'exit';
 	  
-
   var keyboardMap = {
    // 37: LEFT,
     38: UP,
