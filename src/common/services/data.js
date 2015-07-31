@@ -99,12 +99,12 @@ var userEndTime = utcUserEndTime;
   }*/
 
     function userLogin (username, password){
-        var _url = serverUrl+'/authentication/session/new?name='+username+"&password="+password;
+        var _url = serverUrl+'authentication/session/new?name='+username+"&password="+password;
         return $http({method: 'GET', url: _url});
     }
 
     function registerUser(username,firstname,lastname,password,emailid,sex,age){
-        var _url = serverUrl+'/authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
+        var _url = serverUrl+'authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
         return $http({method: 'GET', url: _url});
     }
 
