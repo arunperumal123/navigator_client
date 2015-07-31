@@ -97,14 +97,26 @@ var userEndTime = utcUserEndTime;
 	var _url = serverUrl+'epg/program?user=rovi&id='+programID+"&airingTime="+airingTime;
 	return $http({method: 'GET', url: _url});  
   }*/
-  
+
+    function userLogin (username, password){
+        var _url = serverUrl+'/authentication/session/new?name='+username+"&password="+password;
+        return $http({method: 'GET', url: _url});
+    }
+
+    function registerUser(username,firstname,lastname,password,emailid,sex,age){
+        var _url = serverUrl+'/authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
+        return $http({method: 'GET', url: _url});
+    }
+
   return {
     getChannelList: getChannelList,
     getProgramList: getProgramList,
     getProgramInfo: getProgramInfo,
     getSearchResult: getSearchResult,
 	getProgramDetails: getProgramDetails,
-	getDayProgramList:getDayProgramList
+	getDayProgramList:getDayProgramList,
+      userLogin: userLogin,
+      registerUser:registerUser
   }
 
 }]);
