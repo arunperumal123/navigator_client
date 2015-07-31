@@ -2,7 +2,6 @@
 body {
     background-color: transparent !important;
 }
-
 .navbar-default {
     opacity: .7;
 }
@@ -11,15 +10,10 @@ body {
     padding: 10px 0 10px 20px;
 }
 
-
 .slick-slider a {
     color: #ffffff;
     text-decoration: none;
     font-size: 20px;
-}
-
-.programInfo {
-    background: #fff;
 }
 
 video#bgvid {
@@ -71,14 +65,25 @@ video#bgvid {
     background-color: #007a7a;
 
 }
-
-#section1 {
-    /*background-color: #92C7C7;*/
-	/*background-color:#33CCCC ;*/
+/* Channel Section */
+#channelSection {
     color: #dedeff;
-    /*padding: 5px 0;*/
-    border-radius: 4px;
 }
+#channelSection .channel-carousel{
+}
+#channelSection .channel-item {
+	text-align:center;
+	background-color:#33CCCC;
+	margin:5px;
+	padding:5px;
+	border-top-right-radius: 50px;
+	border-bottom-left-radius: 50px;
+	
+}
+#channelSection .channel-item-active {
+	background-color:#477E7E !important;
+}
+
 
 #section2 {
    /* background-color: #5F5F5F;*/
@@ -93,12 +98,10 @@ video#bgvid {
     margin-top: 10px;
 }
 
-#channelCarousel, #programCarousel {
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
+.programInfo {
+    background: #fff;
 }
+
 
 .innerCarouselDiv a {
     color: #5A5757;
@@ -145,6 +148,7 @@ video#bgvid {
 .search-results-pgm-info .pgm-image-container {
 	background-color:#33CCCC
 }
+
 .search-results-pgm-info .pgm-image {
 	background-color:#47d1d1
 }

@@ -39,14 +39,16 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
 
 		$scope.programList = pgmDataObj;
 		
-		//for highlighting selectexd channel. Need to modify the logic/code
+		//for highlighting selectexd channel. 
 		if(selectedChannel){
-			var oldChObj = document.getElementById("channel_container_"+selectedChannel);
-			if(oldChObj){
-				oldChObj.style.backgroundColor = '#33CCCC';	
+			var prevChannelElm = $("#channel_container_"+selectedChannel);		
+			if(prevChannelElm && prevChannelElm.hasClass('channel-item-active')){
+				prevChannelElm.removeClass('channel-item-active');	
 			}
-			var chObj = document.getElementById("channel_container_"+$stateParams.cid);
-			chObj.style.backgroundColor = '#477E7E';	
+		}
+		var chObj = $("#channel_container_"+$stateParams.cid);
+		if(chObj) {
+			chObj.addClass('channel-item-active');	
 		}
 		selectedChannel = $stateParams.cid;
 		
@@ -90,14 +92,16 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		videoElement.play();
 	}
 
-	//for highlighting selectexd channel. Need to modify the logic/code
-	if(selectedChannel) {
-		var oldChObj = document.getElementById("channel_container_"+selectedChannel);
-		if(oldChObj){
-			oldChObj.style.backgroundColor = '#33CCCC';	
+	//for highlighting selectexd channel. 
+	if(selectedChannel){
+		var prevChannelElm = $("#channel_container_"+selectedChannel);		
+		if(prevChannelElm && prevChannelElm.hasClass('channel-item-active')){
+			prevChannelElm.removeClass('channel-item-active');	
 		}
-		var chObj = document.getElementById("channel_container_"+singleProgram['channel_index']);
-		chObj.style.backgroundColor = '#477E7E';	
+	}
+	var chObj = $("#channel_container_"+$stateParams.cid);
+	if(chObj) {
+		chObj.addClass('channel-item-active');	
 	}
 	selectedChannel = singleProgram['channel_index'];   
 }]);
