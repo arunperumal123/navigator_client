@@ -1,0 +1,17 @@
+<div ng-controller="userAuthLoginController">
+    <section id="section8">
+        <form class="well pgm-form-search">
+            <label class='search-title'>User Name</label>
+            <input type="text" ng-model="username" placeholder="user name...">
+            <label class='search-title'>Password </label>
+            <input type="password" ng-model="password" placeholder="password...">
+            <button ng-click="validateUser()">Login</button>
+
+
+
+        </form>
+    </section>
+
+    <div ui-view></div>
+
+</div>

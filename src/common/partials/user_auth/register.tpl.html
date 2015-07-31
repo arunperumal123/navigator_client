@@ -1,0 +1,32 @@
+<div ng-controller="userAuthRegisterController">
+    <section id="section9">
+        <form class="well pgm-form-search">
+            <label class='search-title'>User Name</label>
+            <input type="text" ng-model="username" placeholder="user name..."> <br>
+
+            <label class='search-title'>First Name </label>
+            <input type="text" ng-model="firstname" placeholder="First Name..."> <br>
+
+            <label class='search-title'>Last Name</label>
+            <input type="text" ng-model="lastname" placeholder="Last Name..."> <br>
+
+            <label class='search-title'>Password</label>
+            <input type="password" ng-model="password" placeholder="Password..."> <br>
+
+            <label class='search-title'>Email ID</label>
+            <input type="text" ng-model="emailid" placeholder="Email Id..."> <br>
+
+            <label class='search-title'>Gender</label>
+            <input type="radio" name="sex" value="male" checked>Male
+            <input type="radio" name="sex" value="female" checked>Female
+            <br>
+            <label class='search-title'>Age</label>
+            <input type="text" ng-model="age" placeholder="Age..."> <br>
+
+            <button type="submit" ng-click="registerUser()" class ="btn register-submit-btn">Submit</button>
+        </form>
+    </section>
+
+    <div ui-view></div>
+
+</div>

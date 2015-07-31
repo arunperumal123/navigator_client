@@ -2,7 +2,12 @@
     <ul class="nav navbar-nav">
         <li ng-class="{active: $state.includes('tabs.bychannel')}" ><a ui-sref="tabs.bychannel.channellist" tabindex="1" id="byChannel">Guide</a></li>
         <li ng-class="{active: $state.includes('tabs.search')}" ><a ui-sref="tabs.search" tabindex="2">Search</a></li>
+        <li ng-class="{active: $state.includes('tabs.auth')}" ><a ui-sref="tabs.auth" tabindex="3">User Authentication</a></li>
+
     </ul>
 </div>
 <div class="tabcontent" ui-view="channeltab" ng-show="$state.includes('tabs.bychannel')"></div>
 <div class="tabcontent" ui-view="searchtab" ng-show="$state.includes('tabs.search')"></div>
+<div class="tabcontent" ui-view="userauthtab" ng-show="$state.includes('tabs.auth')"></div>
+
+

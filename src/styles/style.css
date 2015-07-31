@@ -131,7 +131,7 @@ video#bgvid {
 	max-height: 400px; overflow:auto;
 }
 .search-results .search-results-item{
-	padding-top:10px;padding:bottom:10px;
+	padding-top:10px;padding-bottom:10px;
 }
 
 .search-results .search-results-item-title{

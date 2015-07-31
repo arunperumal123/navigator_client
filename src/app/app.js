@@ -19,6 +19,33 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         }
     });
 
+    // user auth tab
+    states.push({   name: 'tabs.auth',
+        url: 'authentication/',
+        views: { 'userauthtab':
+        {
+            templateUrl: 'templates/partials/user_auth/layout.tpl.html'}
+        },
+        controller: 'userAuthController'
+    });
+
+    // user authentication login tab
+    states.push({   name: 'tabs.auth.login',
+        url: 'session/new',
+        templateUrl: 'templates/partials/user_auth/login.tpl.html',
+        controller: 'userAuthLoginController'
+
+    });
+
+
+    // user authentication Register tab
+    states.push({   name: 'tabs.auth.register',
+        url: 'users/new',
+        templateUrl: 'templates/partials/user_auth/register.tpl.html',
+        controller: 'userAuthRegisterController'
+
+    });
+
     // ViewByChannel tab
     states.push({   name: 'tabs.bychannel',
         url: 'channels',
