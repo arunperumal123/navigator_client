@@ -1,50 +1,31 @@
 cloudStbApp.controller('channelController', ['$scope', 'channelData', '$timeout', 'VideoPlayer', function ($scope, channelData, $timeout, VideoPlayer) {
 
-    // Service IDs i.e. channel Ids
-    var channelList = channelData.data;
-
-	
-	/*
-	//Test code to replace the image path with local path. Shouldbe removed once gets the actauls data
-    for(var i=0; i<channelList.length; i++) {
-		var channelObj= channelList[i];
-		var channelImage =(channelObj.channelImage).replace("http://172.28.11.54/epg/image_icon/","/dist/assets/channels_logo/");
-		channelObj.channelImage = channelImage;
-		channelList[i]=channelObj;
-    }
-*/
     //VideoPlayer.play('192.168.0.33/epg/WebKit.mp4');
     //VideoPlayer.play('http://localhost:5000/src/assets/posters/sample-1.mp4');
-	    $scope.channelList = channelList;
+    $scope.channelList = channelData.data;
 
     VideoPlayer.pause();
-
-	//<div ng-controller="channelController">
-
-
 }]);
 
-cloudStbApp.controller('channelControllerAction', ['$scope', 'data', '$stateParams', '$state', function ($scope, data, $stateParams, $state) {
+cloudStbApp.controller('channelControllerAction', ['$scope', '$state', function ($scope, $state) {
 	
     $scope.dayPlus = function () {
 		var nextDay = new Date(channelDay);
 		nextDay.setDate(nextDay.getDate()+1);
-        channelDay = nextDay.toISOString().substr(0,10);
-
+		channelDay = nextDay.toISOString().substr(0,10);
 		$state.go("tabs.bychannel.channellist.channel",{'day':channelDay});
 	};
 
     $scope.dayMinus = function () {
 		var prevDay = new Date(channelDay);
 		prevDay.setDate(prevDay.getDate()-1);
-		 channelDay = prevDay.toISOString().substr(0,10);
+		channelDay = prevDay.toISOString().substr(0,10);
 		$state.go("tabs.bychannel.channellist.channel",{'day':channelDay});
 	};
 	
 }]);
 
 cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , 'programDate' , function ($scope, data, $stateParams, programList,  VideoPlayer, programDate) {
-//cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , function ($scope, data, $stateParams, programList, VideoPlayer) {
    // var _videoURL;
       var _channelIndex;
 	var _programDate = {};
