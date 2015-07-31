@@ -256,10 +256,10 @@ cloudStbApp.controller('loginController', ['$scope','data', '$stateParams', '$st
 cloudStbApp.controller('userAuthController', ['$scope','data', '$stateParams', '$state' , function ($scope,data, $stateParams, $state) {
 
     $scope.login = function () {
-        $state.go("tabs.auth.login");
+        $state.go("tabs_auth.login");
     };
     $scope.register = function () {
-        $state.go("tabs.auth.register");
+        $state.go("tabs_auth.register");
     };
 }]);
 
