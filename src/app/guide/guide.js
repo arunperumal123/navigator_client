@@ -263,7 +263,7 @@ cloudStbApp.controller('userAuthController', ['$scope','data', '$stateParams', '
     };
 }]);
 
-cloudStbApp.controller('userAuthLoginController', ['$scope', 'data', function ($scope,data) {
+cloudStbApp.controller('userAuthLoginController', ['$scope', 'data','$stateParams', '$state', function ($scope,data,$stateParams, $state) {
 
     $scope.validateUser = function () {
         username = $scope.username;
@@ -271,6 +271,7 @@ cloudStbApp.controller('userAuthLoginController', ['$scope', 'data', function ($
         var res = data.userLogin(username,password);
 
         res.success(function(dataResult) {
+			$state.go("tabs");
             return dataResult;
         }).error(function() {
             alert("No user Found");
@@ -280,7 +281,7 @@ cloudStbApp.controller('userAuthLoginController', ['$scope', 'data', function ($
 
 }]);
 
-cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', function ($scope,data) {
+cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateParams', '$state', function ($scope,data,$stateParams, $state) {
 
     $scope.registerUser = function () {
         username=$scope.username;
@@ -294,6 +295,7 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', function
         res.success(function(dataResult) {
             alert(dataResult);
             alert("Successfully created Profile");
+			$state.go("tabs");
             return dataResult;
         }).error(function() {
             alert("Error in creating Profile");

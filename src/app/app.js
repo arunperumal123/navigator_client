@@ -5,8 +5,8 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     $stickyStateProvider.enableDebug(true);
 
     var states = [];
-    /*states.push({   name: 'tabs',
-        url: '/',
+    states.push({   name: 'tabs',
+        url: '/tabs/',
         views: {
         '@':   { templateUrl: 'templates/partials/tabs.tpl.html',
                  controller: function () {
@@ -17,7 +17,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
                 }
             }
         }
-    });*/
+    });
 
     states.push({   name: 'tabs_auth',
         url: '/',
