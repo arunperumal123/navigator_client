@@ -1,20 +1,12 @@
-<section id="section1">
-    <div  slick-slider="{dots: false, arrows: true, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false, focusOnSelect:true}">
-	
-        <div class="my-slide" ng-repeat="channel in channelList">
-		
-			<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel" style="border-radius:10px;">
-				<div style='text-align:center;;background-color:#33CCCC;margin:5px;padding:5px;' id="channel_container_{{channel.channel_number}}">
+<section id="channelSection">
+	<div  slick-slider="{dots: false, arrows: true, draggable: false, slidesToScroll:1,slidesToShow:5, infinite:false, focusOnSelect:true}">
+		<div class="my-slide" ng-repeat="channel in channelList" >
+			<a ui-sref=".channel({cid: channel.channel_number})"  >
+				<div class="channel-item" id="channel_container_{{channel.channel_number}}">
 					<div> Channel {{channel.channel_number}}</div>
 					<div>{{channel.channel_name}}</div>
 				</div>
-
-			</a>
-			
-
-
-            <!--<a ui-sref=".channel({cid: channel.channel_number})" class="channelCarousel"><img width="140" height="140" ng-src="{{channel.channel_logo_id}}" /></a>-->
-			
+			</a>			
         </div>
     </div>
 </section>

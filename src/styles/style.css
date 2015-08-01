@@ -11,15 +11,10 @@ body {
     padding: 10px 0 10px 20px;
 }
 
-
 .slick-slider a {
     color: #ffffff;
     text-decoration: none;
     font-size: 20px;
-}
-
-.programInfo {
-    background: #fff;
 }
 
 video#bgvid {
@@ -56,7 +51,7 @@ video#bgvid {
     /*background-color: #279ddd;*/
 	background-color: #248f8f;
     color: #fff;
-    opacity: 1;
+	box-shadow: 0px 0px 15px 1px #248f8f;
 }
 
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:hover {
@@ -71,50 +66,101 @@ video#bgvid {
     background-color: #007a7a;
 
 }
-
-#section1 {
-    /*background-color: #92C7C7;*/
-	/*background-color:#33CCCC ;*/
+/* Channel Section */
+#channelSection {
     color: #dedeff;
-    /*padding: 5px 0;*/
-    border-radius: 4px;
+}
+#channelSection .channel-carousel{
+}
+#channelSection .channel-item {
+	text-align:center;
+	background-color:#33CCCC;
+	padding:5px;
+	border-top-right-radius: 50px;
+	border-bottom-left-radius: 50px;
+	margin:15px;
+	box-shadow: 10px 13px 5px 2px #33aaa0;	
+}
+#channelSection .channel-item-active {
+	background-color:#477E7E !important;
+	box-shadow: 10px 13px 5px 2px #066262;	
 }
 
-#section2 {
-   /* background-color: #5F5F5F;*/
-/*   background-color: #33CCCC;*/
+/*Program Section */
+#programSection {
     color: #686868;
-/*    padding: 5px 0;*/
-    border-radius: 4px;
-    margin-top: 4px;
 }
 
-#section3 {
+#programSection .program-item {
+	background:#33CCCC;
+	padding:5px;
+	border-radius:10px;
+	text-align:center;
+	margin:15px;
+	box-shadow: 10px 13px 5px 2px #33aaa0;
+}
+#programSection .program-item-active {
+	background-color:#477E7E !important;
+	box-shadow: 10px 13px 5px 2px #066262;	
+}
+
+#programSection .program-item-time {
+	border-bottom:4px solid #ffffff;padding-left:10px;padding-right:10px;
+}
+#programSection .program-item-title {
+
+	height:100px;vertical-align:middle;padding-top:15px;
+}
+#programSection .no-program {
+	font-weight:bold;background:#33CCCC;color:#ffffff;padding:20px;
+}
+#programSection .program-day-up-down {
+	font-weight:bold;width:70px;height:30px;color:#ffffff;background-color:#33CCCC;border-radius:10px;margin:10px;margin-top:10px;float:right;
+	box-shadow: 10px 5px 8px 0px #248f8f;
+}
+
+#programInfoSection {
     margin-top: 10px;
 }
-
-#channelCarousel, #programCarousel {
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
+#programInfoSection .list-pgm-item, #searchResultsDtSection .list-pgm-item{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    border: 1px solid #DDD;
+	/*box-shadow: 8px 7px 1px 2px #33aaa0*/
 }
 
-.innerCarouselDiv a {
-    color: #5A5757;
+#programInfoSection .list-pgm-group, #searchResultsDtSection .list-pgm-group {
+    padding-left: 0px;
+    margin-bottom: 20px;
 }
 
-.innerCarouselDiv a:hover {
-    color: #c52d2f;
+#programInfoSection .list-pgm-item-head, #searchResultsDtSection .list-pgm-item-head {
+	background-color:#33CCCC;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	color: #ffffff;
+	border: 1px solid #3aa;
 }
-.col-md-6 {
-    padding-left: 0;
+#programInfoSection .list-pgm-item-text-heading, #searchResultsDtSection .list-pgm-item-text-heading {
+	font-weight:bold;
 }
+#programInfoSection .pgm-image {
 
+}
+#programInfoSection .pgm-mini-video, #searchResultsDtSection .pgm-mini-video {
+	width:525px;height:300px;
+}
+#programInfoSection .pgm-image-container, #searchResultsDtSection .pgm-image-container {
+	background-color:#47D1D1;
+}
 
 /*==============Search Options===========*/
 .pgm-form-search {
 	background-color:#2Eb8b8;
+	box-shadow: 0px 0px 15px 1px #248f8f;
+
 }
 
 .pgm-form-search .search-title {
@@ -122,6 +168,8 @@ video#bgvid {
 }
 .pgm-form-search .search-submit-btn {
 	background-color: #477E7E;color:#ffffff;font-weight:bold;
+	box-shadow: 10px 5px 8px 0px #248f8f;
+	opacity:0.7
 }
 
 .search-results .search-results-title{
@@ -145,6 +193,7 @@ video#bgvid {
 .search-results-pgm-info .pgm-image-container {
 	background-color:#33CCCC
 }
+
 .search-results-pgm-info .pgm-image {
 	background-color:#47d1d1
 }

@@ -19,7 +19,6 @@ cloudStbApp.service('KeyHandlerService', ['$state', '$stateParams', function ($s
         }
     };
 
-
     /**
      * The following function for handling 'ENTER' events
      *

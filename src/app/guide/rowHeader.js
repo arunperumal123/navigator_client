@@ -32,7 +32,7 @@ cloudStbApp.directive('rowHeader', function () {
 					"className": "layout_frame",
 					"width": "242px",
 					"text": newDate.toTimeString().substring(0,5)
-				}
+				};
 
 				headings.push(colProperties);
 			}

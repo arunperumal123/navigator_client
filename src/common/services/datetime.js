@@ -39,7 +39,7 @@ cloudStbApp.factory('dateTime', [ function () {
     return {
       startTime: startTimeMilli,
       endTime: endTimeMilli
-    }
+    };
   }
 
   /*
@@ -58,7 +58,7 @@ cloudStbApp.factory('dateTime', [ function () {
       return {
           "userStarTime" : utcUserStartTime,
           "userEndTime" : utcUserEndTime
-      }
+      };
   }
 
   function getCustomStartEndTime (proDuration, proDate) {
@@ -73,7 +73,7 @@ cloudStbApp.factory('dateTime', [ function () {
         duration = (duration*1)+ (proDuration*1);
         endDate = new Date(dateObj.setMinutes(duration));
     
-    return startDate.toTimeString().substring(0,5) +" - "+ endDate.toTimeString().substring(0,5)
+    return startDate.toTimeString().substring(0,5) +" - "+ endDate.toTimeString().substring(0,5);
    }
 
 
@@ -102,6 +102,6 @@ function getCustomDate (proDate) {
   getCustomStartEndTime: getCustomStartEndTime,
   getCustomDate: getCustomDate,
   UTCLocalTimeConversion: UTCLocalTimeConversion
- }
+ };
 
 }]);

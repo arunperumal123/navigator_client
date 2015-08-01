@@ -13,7 +13,6 @@ cloudStbApp.factory('VideoPlayer', [ '$document', function ($document) {
         pause: function() {
             videoElement.pause();
         }
-
         // Extend this service to include other functions like pausing, etc, etc.
-    }
+    };
 }]);
