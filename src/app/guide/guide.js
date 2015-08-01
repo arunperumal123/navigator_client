@@ -269,8 +269,7 @@ cloudStbApp.controller('userAuthLoginController', ['$scope', 'data','$stateParam
         username = $scope.username;
         password = $scope.password;
         var res = data.userLogin(username,password);
-
-        res.success(function(dataResult) {
+		res.success(function(dataResult) {
 			$state.go("tabs");
             return dataResult;
         }).error(function() {

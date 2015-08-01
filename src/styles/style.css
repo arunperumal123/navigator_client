@@ -71,6 +71,15 @@ video#bgvid {
     background-color: #007a7a;
 
 }
+.user-name {
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    right :130px;
+    width:250px;
+    height:50px;
+    margin-top: 10px;
+}
 
 #section1 {
     /*background-color: #92C7C7;*/
