@@ -1,4 +1,4 @@
-<section id="section5">
+<section id="searchResultsSection">
 	<div class='search-results' ng-if= "searchData">
 		<span href="#" class="list-group-item  search-results-title">
 		   <h4 class="list-group-item-heading" style='color:#ffffff;'>Search Results</h4>
@@ -7,19 +7,13 @@
 			<div class="search-results-container">
 				<div class="col-md-12" ng-repeat="programList in searchData">
 					<a ui-sref=".searchResultsInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
-						<!--<img width="50" height="50" ng-src="{{programList.channelImage}}" />-->
 						<span style='width:200px;'  class="search-results-item-title">
 							Channel  {{programList.channel_index}}
 						</span>	
 						
 						<span style='width:400px;' class="search-results-item-title">
 							{{programList.title}}
-						</span>
-						
-						<!--<span style='width:200px;' class="search-results-item-title">
-							{{programList.cast}}
-						</span>-->
-					
+						</span>				
 					</a>
 				</div>
 			</div>

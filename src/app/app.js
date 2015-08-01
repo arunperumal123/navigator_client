@@ -20,7 +20,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     });
 
     // ViewByChannel tab
-    states.push({   name: 'tabs.bychannel',
+    states.push({ name: 'tabs.bychannel',
         url: 'channels',
         views: 
 		    { 'channeltab':
@@ -52,7 +52,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 					if($stateParams.day){
 						return data.getDayProgramList($stateParams.cid, $stateParams.day);
 					} else {
-						// Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
+						// Pass ChannelId to fetch program info for that channel
 						return data.getProgramList($stateParams.cid);
 					}
                 }
@@ -61,40 +61,21 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 				if($stateParams.day){
 					return $stateParams.day;
 				} else {
-					// Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
+					// Pass Current day 
 					return '2015-07-11';
 				}
             }]
         },
         templateUrl: 'templates/partials/channel/programCarousel.tpl.html'
     });
-	
-   states.push({ name: 'tabs.bychannel.channellist.channel.day',
-        url: '/channel/:cid/:day',
-        controller: 'programController',
-        resolve:{
-            programList: ['$stateParams', 'data', function($stateParams, data){
-			alert("ddd");
-                if ($stateParams.cid) {
-				alert('ssssssssss');
-                    // Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
-
-
-
-                    return data.getDayProgramList($stateParams.cid, $stateParams.day);
-                }
-            }]
-        },
-        templateUrl: 'templates/partials/channel/programCarousel.tpl.html'
-    });
-	
+		
     states.push({ name: 'tabs.bychannel.channellist.channel.programInfo',
         url: '/programInfo/:pid',
         controller: 'programInfoController',
 		resolve:{
             programList: ['$stateParams', 'data', function($stateParams, data){
                 if ($stateParams.pid) {
-                    // Pass SourceID/ChannelId to fetch program info for that channel based on start & end time
+                    // Pass programid
                     return data.getProgramDetails($stateParams.pid);
                 }
             }]
@@ -140,19 +121,6 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         },
         templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
     });
-
-    // search tab
-    states.push({   name: 'tabs.login',
-        url: 'login/',
-        views: 
-			{ 'logintab@tabs':
-				{ 
-					templateUrl: 'templates/partials/login/login.tpl.html'
-				}
-            },
-	controller: 'loginController'
-    });
-
 
     angular.forEach(states, function(state) { $stateProvider.state(state); });
 

@@ -18,7 +18,6 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
 	  GUIDE = 'guide',
 	  EXIT = 'exit';
 	  
-
   var keyboardMap = {
    // 37: LEFT,
     38: UP,
@@ -46,7 +45,7 @@ cloudStbApp.service('EventManagerService', [ '$document', function ($document) {
 
       if (key) {
         // An interesting key was pressed
-		if(!evt.target.nodeName.toUpperCase() == 'INPUT') {
+		if(evt.target.nodeName.toUpperCase() !== 'INPUT') {
 			evt.preventDefault();
 			self._handleKeyEvent(key, evt);
 		}
