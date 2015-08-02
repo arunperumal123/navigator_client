@@ -14,7 +14,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         },
         resolve:{
             userDetails: ['$stateParams', 'data', function($stateParams, data){
-                alert("ddd"+$stateParams.username);
+                alert("ddd oops here is the problem not getting $stateParams.username"+$stateParams.username);
             }]
         }
     });

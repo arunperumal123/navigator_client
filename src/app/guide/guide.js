@@ -270,7 +270,8 @@ cloudStbApp.controller('userAuthLoginController', ['$scope', 'data','$stateParam
         password = $scope.password;
         var res = data.userLogin(username,password);
 		res.success(function(dataResult) {
-			$state.go("tabs");
+			alert("dataResult.firstname>>"+dataResult.firstname);
+			$state.go("tabs",{'username':dataResult.firstname});
             return dataResult;
         }).error(function() {
             alert("No user Found");
@@ -293,7 +294,7 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
         var res= data.registerUser(username,firstname,lastname,password,emailid,sex,age);
         res.success(function(dataResult) {
 			alert("Successfully created Profile");
-			$state.go("tabs");
+			$state.go("tabs",{'username':dataResult.firstname});
             return dataResult;
         }).error(function() {
             alert("Error in creating Profile");
