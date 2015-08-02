@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" role="navigation">
+<div ng-controller="tabsController"class="navbar navbar-default navbar-static-top" role="navigation">
     <ul class="nav navbar-nav">
         <li ng-class="{active: $state.includes('tabs.bychannel')}" ><a ui-sref="tabs.bychannel.channellist" tabindex="1" id="byChannel">Guide</a></li>
         <li ng-class="{active: $state.includes('tabs.search')}" ><a ui-sref="tabs.search" tabindex="2">Search</a></li>

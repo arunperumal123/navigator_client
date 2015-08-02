@@ -9,13 +9,13 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         url: '/tabs/',
         views: {
         '@':   { templateUrl: 'templates/partials/tabs.tpl.html',
-                 controller: function () {
-                     //Setting focus to 'View By Channel' Tab on page display
-                     $('#byChannel').focus();
-                     // Play a video initially
-                    // VideoPlayer.play("http://192.168.0.50:8080/vldms/tuner?ocap_locator=ocap://0x26");
-                }
+                 controller: 'tabsController'
             }
+        },
+        resolve:{
+            userDetails: ['$stateParams', 'data', function($stateParams, data){
+                alert("ddd"+$stateParams.username);
+            }]
         }
     });
 

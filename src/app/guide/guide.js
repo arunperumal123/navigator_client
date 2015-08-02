@@ -301,3 +301,10 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
     };
 
 }]);
+
+cloudStbApp.controller('tabsController', ['$scope', 'data', '$stateParams', 'userDetails', function ($scope, data, $stateParams, userDetails) {
+	alert("inside tabs controller");
+	$('#byChannel').focus();
+	$scope.username=userDetails.username;
+
+}]);
