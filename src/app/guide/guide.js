@@ -288,12 +288,11 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
         lastname=$scope.lastname;
         password=$scope.password;
         emailid=$scope.emailid;
-        sex=$scope.sex;
+        sex=$scope.gender;
         age=$scope.age;
         var res= data.registerUser(username,firstname,lastname,password,emailid,sex,age);
         res.success(function(dataResult) {
-            alert(dataResult);
-            alert("Successfully created Profile");
+			alert("Successfully created Profile");
 			$state.go("tabs");
             return dataResult;
         }).error(function() {
