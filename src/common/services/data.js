@@ -1,7 +1,5 @@
-
-var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
-//var serverUrl = "http://localhost:9080/";
-
+//var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
+var serverUrl = "http://localhost:9080/";
 var currentDate = new Date();
 var channelDay = currentDate.toISOString().substr(0,10);
 var selectedChannel =null;
@@ -64,6 +62,17 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 		var _url = serverUrl+'epg/search?user=rovi&title='+searchString;
 		return $http({method: 'GET', url: _url});
 	}
+
+
+    function userLogin (username, password){
+        var _url = serverUrl+'authentication/session/new?name='+username+"&password="+password;
+        return $http({method: 'GET', url: _url});
+    }
+
+    function registerUser(username,firstname,lastname,password,emailid,sex,age){
+        var _url = serverUrl+'authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
+        return $http({method: 'GET', url: _url});
+    }
  
 	return {
 		getChannelList: getChannelList,
@@ -71,6 +80,8 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 		getProgramInfo: getProgramInfo,
 		getSearchResult: getSearchResult,
 		getProgramDetails: getProgramDetails,
-		getDayProgramList:getDayProgramList
+		getDayProgramList:getDayProgramList,
+                userLogin: userLogin,
+                registerUser:registerUser
 	};
 }]);

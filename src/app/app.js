@@ -6,7 +6,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 
     var states = [];
     states.push({   name: 'tabs',
-        url: '/',
+        url: '/tabs/',
         views: {
         '@':   { templateUrl: 'templates/partials/tabs.tpl.html',
                  controller: function () {
@@ -17,6 +17,34 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
                 }
             }
         }
+    });
+
+    states.push({   name: 'tabs_auth',
+        url: '/',
+        views: {
+            '@': {
+                templateUrl: 'templates/partials/user_auth/layout.tpl.html'
+            }
+        },
+        controller: 'userAuthController'
+    });
+
+
+    // user authentication login tab
+    states.push({   name: 'tabs_auth.login',
+        url: 'session/new',
+        templateUrl: 'templates/partials/user_auth/login.tpl.html',
+        controller: 'userAuthLoginController'
+
+    });
+
+
+    // user authentication Register tab
+    states.push({   name: 'tabs_auth.register',
+        url: 'users/new',
+        templateUrl: 'templates/partials/user_auth/register.tpl.html',
+        controller: 'userAuthRegisterController'
+
     });
 
     // ViewByChannel tab

@@ -109,7 +109,7 @@ video#bgvid {
 }
 #programSection .program-item-title {
 
-	height:100px;vertical-align:middle;padding-top:15px;
+	height:100px;vertical-align:middle;padding-top:15px;overflow:hidden;
 }
 #programSection .no-program {
 	font-weight:bold;background:#33CCCC;color:#ffffff;padding:20px;
