@@ -90,6 +90,9 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		videoElement.src = 'http://localhost:8080/dist/assets/posters/'+video;
 		videoElement.load();
 		videoElement.play();
+		if(loggedInUser) {
+			data.postUserUsageDetails(loggedInUser.userName,$stateParams.pid, singleProgram.start_time, singleProgram.start_time, '30');
+		}
 	}
 
 	//for highlighting selectexd channel. 
@@ -136,15 +139,15 @@ cloudStbApp.controller('searchResultsController', ['$scope', 'searchData', 'Vide
 	$scope.searchData = searchData.data;
 }]);
 
-cloudStbApp.controller('searchResultsInfoController', ['$scope', '$stateParams', 'programDetails', 'VideoPlayer', function ($scope, $stateParams, programDetails, VideoPlayer) {
+cloudStbApp.controller('searchResultsInfoController', ['$scope', 'data', '$stateParams', 'programDetails', 'VideoPlayer', function ($scope, data, $stateParams, programDetails, VideoPlayer) {
 
 	var _programInfo = {};
 	$scope.programDetails= programDetails.data;
 
 	// If ProgramId exists 
 	if ($stateParams.pid) {
+		
 		var singleProgram =  $scope.programDetails;
-
 		_programInfo.audioType = singleProgram.audio_type;
 		_programInfo.cast = singleProgram.cast;
 		_programInfo.title = $scope.currentProgramTitle = singleProgram.title;
@@ -174,6 +177,10 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', '$stateParams',
 		videoElement.src = 'http://localhost:8080/dist/assets/posters/'+video;
 		videoElement.load();
 		videoElement.play();
+		
+		if(loggedInUser) {
+			data.postUserUsageDetails(loggedInUser.userName,$stateParams.pid, singleProgram.start_time, singleProgram.start_time, '30');
+		}
 	}
 }]);
 
@@ -194,9 +201,9 @@ cloudStbApp.controller('userAuthLoginController', ['$scope', 'data','$stateParam
         password = $scope.password;
         var res = data.userLogin(username,password);
 		res.success(function(dataResult) {
-                loggedInUserName = dataResult.firstname; 
-		$state.go("tabs");
-            return dataResult;
+            loggedInUser = {"name":dataResult.firstname,"userName":dataResult.username}; 
+	        $state.go("tabs");
+			return dataResult;
         }).error(function() {
             alert("No user Found");
         });
@@ -217,17 +224,17 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
         var res= data.registerUser(username,firstname,lastname,password,emailid,sex,age);
         res.success(function(dataResult) {
 			alert("Successfully created Profile");
-                loggedInUserName = dataResult.firstname; 
-		$state.go("tabs");
+            loggedInUser = {"name":dataResult.firstname,"userName":dataResult.username}; 
+			$state.go("tabs");
             return dataResult;
         }).error(function() {
             alert("Error in creating Profile");
         });
     };
-
 }]);
 
 cloudStbApp.controller('tabsController', ['$scope', 'data', '$stateParams', function ($scope, data, $stateParams) {
-	$scope.username=(loggedInUserName)?loggedInUserName:"";
+
+	$scope.username=(loggedInUser)?loggedInUser.name:"";
 	$('#byChannel').focus();
 }]);

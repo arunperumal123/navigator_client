@@ -4,7 +4,7 @@ var currentDate = new Date();
 var channelDay = currentDate.toISOString().substr(0,10);
 var selectedChannel =null;
 var selectedProgram =null;
-var loggedInUserName =null;
+var loggedInUser =null;
 cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 
 	// Following function gives all channels
@@ -73,7 +73,10 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
         var _url = serverUrl+'authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
         return $http({method: 'GET', url: _url});
     }
- 
+    function postUserUsageDetails(username,programId, date, time, duration){
+        var _url = serverUrl+'epg/usageDetails?user=rovi&?username='+username+"&pgmId="+programId+"&date="+date+"&time="+time+"&duration="+duration;
+        return $http({method: 'GET', url: _url});
+	}
 	return {
 		getChannelList: getChannelList,
 		getProgramList: getProgramList,
@@ -81,7 +84,8 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 		getSearchResult: getSearchResult,
 		getProgramDetails: getProgramDetails,
 		getDayProgramList:getDayProgramList,
-                userLogin: userLogin,
-                registerUser:registerUser
+        userLogin: userLogin,
+        registerUser:registerUser,
+		postUserUsageDetails:postUserUsageDetails
 	};
 }]);

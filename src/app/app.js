@@ -115,8 +115,9 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 					templateUrl: 'templates/partials/search/searchCarousel.tpl.html'
 				}
             },
-	controller: 'searchController'
+		controller: 'searchController'
     });
+
 
     // search results tab
     states.push({   name: 'tabs.search.results',
@@ -143,6 +144,18 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
             }]
         },
         templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
+    });
+
+    // search tab
+    states.push({   name: 'tabs.recommendations',
+        url: 'recommendations/',
+        views: 
+			{ 'recommendations@tabs':
+				{ 
+					templateUrl: 'templates/partials/recommendations/recommendations.tpl.html'
+				}
+            }/*,
+		controller: 'searchController'*/
     });
 
     angular.forEach(states, function(state) { $stateProvider.state(state); });
