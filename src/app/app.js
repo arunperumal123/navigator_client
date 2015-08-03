@@ -5,16 +5,11 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     $stickyStateProvider.enableDebug(true);
 
     var states = [];
-    states.push({   name: 'tabs',
+	states.push({   name: 'tabs',
         url: '/tabs/',
         views: {
         '@':   { templateUrl: 'templates/partials/tabs.tpl.html',
-                 controller: function () {
-                     //Setting focus to 'View By Channel' Tab on page display
-                     $('#byChannel').focus();
-                     // Play a video initially
-                    // VideoPlayer.play("http://192.168.0.50:8080/vldms/tuner?ocap_locator=ocap://0x26");
-                }
+                 controller: 'tabsController'
             }
         }
     });

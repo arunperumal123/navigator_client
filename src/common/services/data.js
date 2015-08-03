@@ -4,7 +4,7 @@ var currentDate = new Date();
 var channelDay = currentDate.toISOString().substr(0,10);
 var selectedChannel =null;
 var selectedProgram =null;
-
+var loggedInUserName =null;
 cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 
 	// Following function gives all channels

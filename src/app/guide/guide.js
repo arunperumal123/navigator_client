@@ -194,13 +194,13 @@ cloudStbApp.controller('userAuthLoginController', ['$scope', 'data','$stateParam
         password = $scope.password;
         var res = data.userLogin(username,password);
 		res.success(function(dataResult) {
-			$state.go("tabs");
+                loggedInUserName = dataResult.firstname; 
+		$state.go("tabs");
             return dataResult;
         }).error(function() {
             alert("No user Found");
         });
     }
-
 
 }]);
 
@@ -217,11 +217,17 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
         var res= data.registerUser(username,firstname,lastname,password,emailid,sex,age);
         res.success(function(dataResult) {
 			alert("Successfully created Profile");
-			$state.go("tabs");
+                loggedInUserName = dataResult.firstname; 
+		$state.go("tabs");
             return dataResult;
         }).error(function() {
             alert("Error in creating Profile");
         });
     };
 
+}]);
+
+cloudStbApp.controller('tabsController', ['$scope', 'data', '$stateParams', function ($scope, data, $stateParams) {
+	$scope.username=(loggedInUserName)?loggedInUserName:"";
+	$('#byChannel').focus();
 }]);
