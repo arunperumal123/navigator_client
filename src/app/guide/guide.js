@@ -176,3 +176,52 @@ cloudStbApp.controller('searchResultsInfoController', ['$scope', '$stateParams',
 		videoElement.play();
 	}
 }]);
+
+cloudStbApp.controller('userAuthController', ['$scope','data', '$stateParams', '$state' , function ($scope,data, $stateParams, $state) {
+
+    $scope.login = function () {
+        $state.go("tabs_auth.login");
+    };
+    $scope.register = function () {
+        $state.go("tabs_auth.register");
+    };
+}]);
+
+cloudStbApp.controller('userAuthLoginController', ['$scope', 'data','$stateParams', '$state', function ($scope,data,$stateParams, $state) {
+
+    $scope.validateUser = function () {
+        username = $scope.username;
+        password = $scope.password;
+        var res = data.userLogin(username,password);
+		res.success(function(dataResult) {
+			$state.go("tabs");
+            return dataResult;
+        }).error(function() {
+            alert("No user Found");
+        });
+    }
+
+
+}]);
+
+cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateParams', '$state', function ($scope,data,$stateParams, $state) {
+
+    $scope.registerUser = function () {
+        username=$scope.username;
+        firstname=$scope.firstname;
+        lastname=$scope.lastname;
+        password=$scope.password;
+        emailid=$scope.emailid;
+        sex=$scope.gender;
+        age=$scope.age;
+        var res= data.registerUser(username,firstname,lastname,password,emailid,sex,age);
+        res.success(function(dataResult) {
+			alert("Successfully created Profile");
+			$state.go("tabs");
+            return dataResult;
+        }).error(function() {
+            alert("Error in creating Profile");
+        });
+    };
+
+}]);

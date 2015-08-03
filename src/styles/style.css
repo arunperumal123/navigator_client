@@ -202,3 +202,14 @@ video#bgvid {
     color:#2Eb8b8 !important;
 	font-weight:bold;
 }
+
+
+.user-name {
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    right :130px;
+    width:250px;
+    height:50px;
+    margin-top: 10px;
+}
