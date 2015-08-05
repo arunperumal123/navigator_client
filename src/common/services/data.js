@@ -5,7 +5,11 @@ var channelDay = currentDate.toISOString().substr(0,10);
 var selectedChannel =null;
 var selectedProgram =null;
 var loggedInUser =null;
-cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
+var selectedProgramStartTime = null;
+var watchingProgramDt =null;
+
+
+cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, dateTime) {
 
 	// Following function gives all channels
 	function getChannelList () {
@@ -29,11 +33,11 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 
 	// Fetches Program Data for a particular channel for the current day
 	function getProgramList(channelNo) { 
-		var currentDate = new Date();
-		var utcFromDate = currentDate.toISOString();
-		var toDate = new Date();
-		toDate.setDate(toDate.getDate()+1);
-		var utcToDate = toDate.toISOString();
+
+		var fromDate = dateTime.getCurrentDate();
+		var utcFromDate = dateTime.getUTCTimeString(fromDate);
+		var toDate = dateTime.addDays(dateTime.getCurrentDate(), 1);
+		var utcToDate = dateTime.getUTCTimeString(toDate);
 
 		var _url = serverUrl+'epg/programs?user=rovi&channelNo=' + channelNo + '&pgmStartTime=' + utcFromDate + '&pgmEndTime=' + utcToDate;
 		return $http({method: 'GET', url: _url});
@@ -41,12 +45,11 @@ cloudStbApp.factory('data', [ '$http', '$q', function ($http, $q) {
 
 	// Fetches Program Data for a particular channel for the specified day
 	function getDayProgramList(channelNo, day) {
-
-		var startDate = new Date(day);
-		var utcFromDate = startDate.toISOString();
-		var toDate = new Date(day);
-		toDate.setDate(toDate.getDate()+1);
-		var utcToDate = toDate.toISOString();
+	
+		var fromDate = dateTime.getDateObj(day);
+		var utcFromDate = dateTime.getUTCTimeString(fromDate);
+		var toDate = dateTime.addDays(dateTime.getDateObj(day), 1);
+		var utcToDate = dateTime.getUTCTimeString(toDate);
 		
 		var _url = serverUrl+'epg/programs?user=rovi&channelNo=' + channelNo + '&pgmStartTime=' + utcFromDate + '&pgmEndTime=' + utcToDate;
 		return $http({method: 'GET', url: _url});
