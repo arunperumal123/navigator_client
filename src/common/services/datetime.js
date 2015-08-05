@@ -1,80 +1,47 @@
 cloudStbApp.factory('dateTime', [ function () {
 
-  function getGridStartTime() {
-    var myStartDate = new Date(),
-        minutes= myStartDate.getMinutes();
-
-    myStartDate.setSeconds(0,0);
-
-    if(minutes < 30) {
-      myStartDate.setMinutes(0);
-    } else {
-      myStartDate.setMinutes(30);
-    }
-
-    var gridStartTime = myStartDate;
-
-    return gridStartTime;
+  function getDateObj(dateString){
+	return new Date(dateString); 
+  }
+  
+  function getCurrentDate() {
+	return new Date();
   }
 
-  function getGridEndTime() {
-    var gridEndTime = new Date(getGridStartTime()); 
+  function getUTCTimeString(dateObj) {
+	return dateObj.toISOString();
+  }
+  
+  function addDays(dateObj, noOfDays) { 
+ 		dateObj.setDate(dateObj.getDate()+noOfDays);
+		return dateObj; 
+  }
+  
+  function getProgramAiringTime(startTime, endTime){
+	var startTimeObj = this.getDateObj(startTime);
+	var endTimeObj = this.getDateObj(endTime);
 
-    // Add 90 as we are showing 90 mins data in a screen at a time
-    gridEndTime.setMinutes(( gridEndTime.getMinutes())+ 90);
-
-    return gridEndTime;
-
+	return startTimeObj.getHours()+":"+startTimeObj.getMinutes()+"-"+endTimeObj.getHours()+":"+endTimeObj.getMinutes();
+  }
+  
+  function getDayOfMonth(dateObj){
+    return dateObj.getDate();
+  }
+  
+  //yyy-mm-dd format
+  function getDateString(dateObj){
+	return dateObj.toISOString().substr(0,10);
+  }
+  
+  function getProgramDuration(startTime, endTime) {
+    var difference = Math.abs( ((startTime.getTime()- endTime.getTime()) / (3600*1000)) );	
+	return (difference < 1) ? Math.floor(difference * 60) + ' minutes':difference.toFixed(2)  + ' hour'	;
   }
 
-  function startEndTimeInMilli () {
-    // We fetch the data from the currentTime to today endTime
-    var startTime = new Date(),
-        startTimeMilli = startTime.getTime(),
-        endTime = new Date();
-
-        endTime.setHours(23, 59, 59, 999);
-        endTimeMilli = endTime.getTime();
-
-    return {
-      startTime: startTimeMilli,
-      endTime: endTimeMilli
-    };
+  function getViewedTimeInSeconds(startTime, endTime) {
+	var duration = Math.abs( ((startTime.getTime()- endTime.getTime()) / (1000)) );	
+	return Math.floor(duration);
   }
-
-  /*
-  * Function returns start and end time in UTC format
-  * */
-  function UTCLocalTimeConversion () {
-    //Take current Local time & convert it into UTC format
-      var dt = new Date(),
-          utcUserStartTime = dt.toISOString();
-
-      var endTime = new Date();
-      endTime.setHours(23, 59, 59, 999);
-
-      var utcUserEndTime = endTime.toISOString();
-
-      return {
-          "userStarTime" : utcUserStartTime,
-          "userEndTime" : utcUserEndTime
-      };
-  }
-
-  function getCustomStartEndTime (proDuration, proDate) {
-    var startDate =null,
-        endDate = null,
-        dateObj = null;
-         
-       dateObj = new Date(proDate);
-       startDate = new Date(proDate);
-      
-    var duration = dateObj.getMinutes(); 
-        duration = (duration*1)+ (proDuration*1);
-        endDate = new Date(dateObj.setMinutes(duration));
-    
-    return startDate.toTimeString().substring(0,5) +" - "+ endDate.toTimeString().substring(0,5);
-   }
 
 
 function getCustomDate (proDate) {
@@ -96,12 +63,14 @@ function getCustomDate (proDate) {
   }
 
  return {
-  getGridStartTime: getGridStartTime,
-  getGridEndTime: getGridEndTime,
-  startEndTimeInMilli: startEndTimeInMilli,
-  getCustomStartEndTime: getCustomStartEndTime,
-  getCustomDate: getCustomDate,
-  UTCLocalTimeConversion: UTCLocalTimeConversion
+  getDateObj: getDateObj,
+  getCurrentDate: getCurrentDate,
+  getUTCTimeString: getUTCTimeString,
+  addDays: addDays,
+  getProgramAiringTime: getProgramAiringTime,
+  getDayOfMonth: getDayOfMonth,
+  getDateString: getDateString,
+  getProgramDuration:getProgramDuration,
+  getViewedTimeInSeconds: getViewedTimeInSeconds
  };
-
-}]);
+ }]);

@@ -5,18 +5,41 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     $stickyStateProvider.enableDebug(true);
 
     var states = [];
-    states.push({   name: 'tabs',
-        url: '/',
+	states.push({   name: 'tabs',
+        url: '/tabs/',
         views: {
         '@':   { templateUrl: 'templates/partials/tabs.tpl.html',
-                 controller: function () {
-                     //Setting focus to 'View By Channel' Tab on page display
-                     $('#byChannel').focus();
-                     // Play a video initially
-                    // VideoPlayer.play("http://192.168.0.50:8080/vldms/tuner?ocap_locator=ocap://0x26");
-                }
+                 controller: 'tabsController'
             }
         }
+    });
+
+    states.push({   name: 'tabs_auth',
+        url: '/',
+        views: {
+            '@': {
+                templateUrl: 'templates/partials/user_auth/layout.tpl.html'
+            }
+        },
+        controller: 'userAuthController'
+    });
+
+
+    // user authentication login tab
+    states.push({   name: 'tabs_auth.login',
+        url: 'session/new',
+        templateUrl: 'templates/partials/user_auth/login.tpl.html',
+        controller: 'userAuthLoginController'
+
+    });
+
+
+    // user authentication Register tab
+    states.push({   name: 'tabs_auth.register',
+        url: 'users/new',
+        templateUrl: 'templates/partials/user_auth/register.tpl.html',
+        controller: 'userAuthRegisterController'
+
     });
 
     // ViewByChannel tab
@@ -92,8 +115,9 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 					templateUrl: 'templates/partials/search/searchCarousel.tpl.html'
 				}
             },
-	controller: 'searchController'
+		controller: 'searchController'
     });
+
 
     // search results tab
     states.push({   name: 'tabs.search.results',
@@ -120,6 +144,18 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
             }]
         },
         templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
+    });
+
+    // search tab
+    states.push({   name: 'tabs.recommendations',
+        url: 'recommendations/',
+        views: 
+			{ 'recommendations@tabs':
+				{ 
+					templateUrl: 'templates/partials/recommendations/recommendations.tpl.html'
+				}
+            }/*,
+		controller: 'searchController'*/
     });
 
     angular.forEach(states, function(state) { $stateProvider.state(state); });
