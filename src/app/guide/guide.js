@@ -6,7 +6,7 @@ cloudStbApp.controller('channelControllerAction', ['$scope', '$state', 'dateTime
     $scope.dayPlus = function () {
 		var nextDay = dateTime.addDays(dateTime.getDateObj(channelDay), 1);
 
-		channelDay = nextDay.getDateString(prevDay);
+		channelDay = dateTime.getDateString(nextDay);
 		$state.go("tabs.bychannel.channellist.channel",{'day':channelDay});
 	};
     $scope.dayMinus = function () {
