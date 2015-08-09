@@ -1,5 +1,5 @@
-//var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
-var serverUrl = "http://localhost:9080/";
+var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
+//var serverUrl = "http://localhost:9080/";
 var currentDate = new Date();
 var channelDay = currentDate.toISOString().substr(0,10);
 var selectedChannel =null;
