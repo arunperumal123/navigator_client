@@ -137,7 +137,23 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 	
 	selectedChannel = $stateParams.cid;   
 	selectedProgram = $stateParams.pid;
-	
+
+	$scope.progInfo = function () {
+		$scope.IsProgInfo = true;
+		$scope.IsMoreLikeThis = false;
+	};
+
+	$scope.moreLikeThis = function () {
+		$scope.IsProgInfo = false;
+		$scope.IsMoreLikeThis = true;
+		var res= data.getMoreLikeThisPrograms(_programInfo.cast,_programInfo.genre,_programInfo.title);
+		res.success(function(dataResult) {
+			$scope.moreLikeThisPrograms=dataResult;
+		}).error(function() {
+			alert("No results Found");
+		});
+
+	};
 }]);
 
 cloudStbApp.controller('searchController', ['$scope', '$state' , function ($scope, $state) {

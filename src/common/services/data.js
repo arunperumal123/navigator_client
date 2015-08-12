@@ -80,6 +80,17 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
         var _url = serverUrl+'epg/usageDetails?user=rovi&?username='+username+"&pgmId="+programId+"&date="+date+"&time="+time+"&duration="+duration;
         return $http({method: 'GET', url: _url});
 	}
+	function getMoreLikeThisPrograms(cast,genre, title) {
+
+		var fromDate = dateTime.getCurrentDate();
+		var utcFromDate = dateTime.getUTCTimeString(fromDate);
+		var toDate = dateTime.addDays(dateTime.getCurrentDate(), 1);
+		var utcToDate = dateTime.getUTCTimeString(toDate);
+
+		var _url = serverUrl+'epg/programs/morelikethis?user=rovi&pgmStartTime=' + utcFromDate + '&pgmEndTime=' + utcToDate+ '&cast='+ cast+ "&genre="+genre+ "&title="+title;
+		return $http({method: 'GET', url: _url});
+
+	}
 	return {
 		getChannelList: getChannelList,
 		getProgramList: getProgramList,
@@ -89,6 +100,7 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
 		getDayProgramList:getDayProgramList,
         userLogin: userLogin,
         registerUser:registerUser,
-		postUserUsageDetails:postUserUsageDetails
+		postUserUsageDetails:postUserUsageDetails,
+		getMoreLikeThisPrograms: getMoreLikeThisPrograms
 	};
 }]);
