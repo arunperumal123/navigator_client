@@ -161,9 +161,7 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		var _programInfo = {};
 		var res = data.getProgramDetails(pid);
 		res.success(function (dataResult) {
-
-			$scope.programmeDetails = dataResult;
-			var singleProgram = $scope.programmeDetails;
+			var singleProgram = dataResult;
 
 			_programInfo.audioType = singleProgram.audio_type;
 			_programInfo.cast = singleProgram.cast;
@@ -177,7 +175,7 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 			_programInfo.pgmTime = dateTime.getProgramAiringTime(singleProgram.start_time, singleProgram.end_time);
 			_programInfo.pgmDay = dateTime.getDateString(startTime);
 
-			$scope.programInfo = _programInfo;
+			$scope.morelikethisprogramInfo = _programInfo;
 		}).error(function () {
 			alert("No Prog Info Found");
 		});

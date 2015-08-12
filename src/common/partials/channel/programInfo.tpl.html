@@ -52,7 +52,7 @@
 					<div ng-if= "moreLikeThisPrograms">
 						<div class="search-results-container">
 							<div class="col-md-12" ng-repeat="programList in moreLikeThisPrograms">
-								<a href="" ng-click= "MoreLikeThisProgInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
+								<a href="" ng-click= "MoreLikeThisProgInfo(programList.program_id)" class="list-group-item search-results-item" >
 						<span style='width:200px;'  class="search-results-item-title">
 							Channel  {{programList.channel_index}}
 						</span>
@@ -86,22 +86,22 @@
 				   <h4 class="list-pgm-item-heading" >Program Info</h4>
 				</span>
 				<p class="list-pgm-item">
-					<span><span class='list-pgm-item-text-heading'>Title: </span>{{programInfo.title}}</span>
+					<span><span class='list-pgm-item-text-heading'>Title: </span>{{morelikethisprogramInfo.title}}</span>
 				</p>
 				<p class="list-pgm-item">
-					<span><span class='list-pgm-item-text-heading'>Genre: </span>{{programInfo.genre}}</span>
+					<span><span class='list-pgm-item-text-heading'>Genre: </span>{{morelikethisprogramInfo.genre}}</span>
 				</p>
 				<p class="list-pgm-item">
-					<span><span class='list-pgm-item-text-heading'>Airing Time: </span>{{programInfo.pgmTime}}  ({{programInfo.pgmDay}})</span>
+					<span><span class='list-pgm-item-text-heading'>Airing Time: </span>{{morelikethisprogramInfo.pgmTime}}  ({{programInfo.pgmDay}})</span>
 				</p>
 				<p class="list-pgm-item">
-					<span><span class='list-pgm-item-text-heading'>Duration: </span>{{programInfo.duration}}</span>
+					<span><span class='list-pgm-item-text-heading'>Duration: </span>{{morelikethisprogramInfo.duration}}</span>
 				</p>
 				<p class="list-pgm-item">
-					<span><span class='list-pgm-item-text-heading'>Cast: </span>{{programInfo.cast}}</span>
+					<span><span class='list-pgm-item-text-heading'>Cast: </span>{{morelikethisprogramInfo.cast}}</span>
 				</p>
 				<p class="list-pgm-item">
-					<span><span class='list-pgm-item-text-heading'>Audio Type: </span>{{programInfo.audioType}}</span>
+					<span><span class='list-pgm-item-text-heading'>Audio Type: </span>{{morelikethisprogramInfo.audioType}}</span>
 				</p>
 			</div>
 		</div>
