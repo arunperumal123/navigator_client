@@ -137,7 +137,7 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 	
 	selectedChannel = $stateParams.cid;   
 	selectedProgram = $stateParams.pid;
-
+	$scope.IsProgInfo = true;
 	$scope.progInfo = function () {
 		$scope.IsProgInfo = true;
 		$scope.IsMoreLikeThis = false;
