@@ -52,7 +52,7 @@
 					<div ng-if= "moreLikeThisPrograms">
 						<div class="search-results-container">
 							<div class="col-md-12" ng-repeat="programList in moreLikeThisPrograms">
-								<a ui-sref=".searchResultsInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
+								<a href="" ng-click= "MoreLikeThisProgInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
 						<span style='width:200px;'  class="search-results-item-title">
 							Channel  {{programList.channel_index}}
 						</span>
@@ -76,6 +76,35 @@
 			</div>
 		</div>
 
+	</div>
+
+
+	<div class="col-md-6" ng-show = "IsMoreLikeThisProgInfo">
+		<div class="list-pgm">
+			<div class="list-pgm">
+			   <span class="list-pgm-item list-pgm-item-head">
+				   <h4 class="list-pgm-item-heading" >Program Info</h4>
+				</span>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Title: </span>{{programInfo.title}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Genre: </span>{{programInfo.genre}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Airing Time: </span>{{programInfo.pgmTime}}  ({{programInfo.pgmDay}})</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Duration: </span>{{programInfo.duration}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Cast: </span>{{programInfo.cast}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Audio Type: </span>{{programInfo.audioType}}</span>
+				</p>
+			</div>
+		</div>
 	</div>
 
 

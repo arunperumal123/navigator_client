@@ -141,10 +141,12 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 	$scope.progInfo = function () {
 		$scope.IsProgInfo = true;
 		$scope.IsMoreLikeThis = false;
+		$scope.IsMoreLikeThisProgInfo =false;
 	};
 
 	$scope.moreLikeThis = function () {
 		$scope.IsProgInfo = false;
+		$scope.IsMoreLikeThisProgInfo =false;
 		$scope.IsMoreLikeThis = true;
 		var res= data.getMoreLikeThisPrograms(_programInfo.cast,_programInfo.genre,_programInfo.title);
 		res.success(function(dataResult) {
@@ -154,6 +156,35 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		});
 
 	};
+
+	$scope.MoreLikeThisProgInfo= function (pid) {
+		var _programInfo = {};
+		var res = data.getProgramDetails(pid);
+		res.success(function (dataResult) {
+
+			$scope.programmeDetails = dataResult;
+			var singleProgram = $scope.programmeDetails;
+
+			_programInfo.audioType = singleProgram.audio_type;
+			_programInfo.cast = singleProgram.cast;
+			_programInfo.title = singleProgram.title;
+			_programInfo.genre = singleProgram.genre;
+
+			var startTime = dateTime.getDateObj(singleProgram.start_time);
+			var endTime = dateTime.getDateObj(singleProgram.end_time);
+
+			_programInfo.duration =  dateTime.getProgramDuration(startTime, endTime);
+			_programInfo.pgmTime = dateTime.getProgramAiringTime(singleProgram.start_time, singleProgram.end_time);
+			_programInfo.pgmDay = dateTime.getDateString(startTime);
+
+			$scope.programInfo = _programInfo;
+		}).error(function () {
+			alert("No Prog Info Found");
+		});
+
+
+		$scope.IsMoreLikeThisProgInfo =true;
+	}
 }]);
 
 cloudStbApp.controller('searchController', ['$scope', '$state' , function ($scope, $state) {
