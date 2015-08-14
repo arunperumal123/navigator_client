@@ -66,7 +66,6 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
 		return $http({method: 'GET', url: _url});
 	}
 
-
     function userLogin (username, password){
         var _url = serverUrl+'authentication/session/new?name='+username+"&password="+password;
         return $http({method: 'GET', url: _url});
@@ -76,10 +75,17 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
         var _url = serverUrl+'authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
         return $http({method: 'GET', url: _url});
     }
+	
     function postUserUsageDetails(username,programId, date, time, duration){
-        var _url = serverUrl+'epg/usageDetails?user=rovi&?username='+username+"&pgmId="+programId+"&date="+date+"&time="+time+"&duration="+duration;
+        var _url = serverUrl+'epg/usageDetails?user=rovi&username='+username+"&pgmId="+programId+"&date="+date+"&time="+time+"&duration="+duration;
         return $http({method: 'GET', url: _url});
-	}
+    }
+
+    function postCurrentlyWatchedProgramDetails(username,programId, date, time){
+        var _url = serverUrl+'epg/currentlyViewingDetails?user=rovi&username='+username+"&pgmId="+programId+"&date="+date+"&time="+time;
+        return $http({method: 'GET', url: _url});
+    }	
+	
 	return {
 		getChannelList: getChannelList,
 		getProgramList: getProgramList,
@@ -89,6 +95,7 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
 		getDayProgramList:getDayProgramList,
         userLogin: userLogin,
         registerUser:registerUser,
-		postUserUsageDetails:postUserUsageDetails
+		postUserUsageDetails:postUserUsageDetails,
+		postCurrentlyWatchedProgramDetails:postCurrentlyWatchedProgramDetails
 	};
 }]);
