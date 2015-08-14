@@ -52,7 +52,7 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
 		//Implement logic for playing the video
     }
 }]);
-cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , 'dateTime' , function ($scope, data, $stateParams, programList, VideoPlayer, dateTime) {
+cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams', 'programList','moreLikeThisPrograms','VideoPlayer' , 'dateTime' , function ($scope, data, $stateParams, programList,moreLikeThisPrograms, VideoPlayer, dateTime) {
 
 
 	var singleProgram = programList.data;
@@ -137,7 +137,48 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 	
 	selectedChannel = $stateParams.cid;   
 	selectedProgram = $stateParams.pid;
-	
+
+	$scope.IsProgInfo = true;
+	$scope.progInfo = function () {
+		$scope.IsProgInfo = true;
+		$scope.IsMoreLikeThis = false;
+		$scope.IsMoreLikeThisProgInfo =false;
+	};
+
+	$scope.moreLikeThis = function () {
+		$scope.IsProgInfo = false;
+		$scope.IsMoreLikeThisProgInfo =false;
+		$scope.IsMoreLikeThis = true;
+		$scope.moreLikeThisPrograms=moreLikeThisPrograms.data;
+
+	};
+
+	$scope.MoreLikeThisProgInfo= function (pid) {
+		var _programInfo = {};
+		var res = data.getProgramDetails(pid);
+		res.success(function (dataResult) {
+			var singleProgram = dataResult;
+
+			_programInfo.audioType = singleProgram.audio_type;
+			_programInfo.cast = singleProgram.cast;
+			_programInfo.title = singleProgram.title;
+			_programInfo.genre = singleProgram.genre;
+
+			var startTime = dateTime.getDateObj(singleProgram.start_time);
+			var endTime = dateTime.getDateObj(singleProgram.end_time);
+
+			_programInfo.duration =  dateTime.getProgramDuration(startTime, endTime);
+			_programInfo.pgmTime = dateTime.getProgramAiringTime(singleProgram.start_time, singleProgram.end_time);
+			_programInfo.pgmDay = dateTime.getDateString(startTime);
+
+			$scope.morelikethisprogramInfo = _programInfo;
+		}).error(function () {
+			alert("No Prog Info Found");
+		});
+
+
+		$scope.IsMoreLikeThisProgInfo =true;
+	}
 }]);
 
 cloudStbApp.controller('searchController', ['$scope', '$state' , function ($scope, $state) {

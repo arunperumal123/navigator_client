@@ -1,5 +1,8 @@
+<button class='program-day-up-down btn search-submit-btn' type="submit" ng-click="progInfo()"> Programme Info</button>
+<button class='program-day-up-down btn search-submit-btn' type="submit" ng-click="moreLikeThis()">More Like This</button>
+
 <section id="programInfoSection" class = 'search-results-pgm-info'>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show = "IsProgInfo">
          <div class="list-pgm">
 			<div class="list-pgm">
 			   <span class="list-pgm-item list-pgm-item-head">
@@ -26,7 +29,7 @@
 			</div>
      </div>
    </div>
-   <div class="col-md-6">
+   <div class="col-md-6" ng-show = "IsProgInfo">
         <div class="list-pgm pgm-image-container">
             <span class="list-pgm-item  pgm-poster">
                 <!--<img ng-src="/dist/assets/posters/{{programInfo.img}}" width="100%" />-->
@@ -35,4 +38,75 @@
             </span>
         </div>
     </div>
+
+	<div class="col-md-6" ng-show = "IsMoreLikeThis">
+		<div class='search-results' ng-if= "moreLikeThisPrograms">
+			<div class="list-pgm" >
+				<div class="list-pgm">
+
+				<span class="list-pgm-item list-pgm-item-head">
+				   <h4 class="list-pgm-item-heading" >More like this </h4>
+				</span>
+
+					<div ng-if= "moreLikeThisPrograms">
+						<div class="search-results-container">
+							<div class="col-md-12" ng-repeat="programList in moreLikeThisPrograms">
+								<a href="" ng-click= "MoreLikeThisProgInfo(programList.program_id)" class="list-group-item search-results-item" >
+						<span style='width:200px;'  class="search-results-item-title">
+							Channel  {{programList.channel_index}}
+						</span>
+
+						<span style='width:400px;' class="search-results-item-title">
+							{{programList.title}}
+						</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+
+					<div ng-if="moreLikeThisPrograms.length==0">
+						<a class="list-group-item">
+							No search results found...
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="col-md-6" ng-show = "IsMoreLikeThisProgInfo">
+		<div class="list-pgm">
+			<div class="list-pgm">
+			   <span class="list-pgm-item list-pgm-item-head">
+				   <h4 class="list-pgm-item-heading" >Program Info</h4>
+				</span>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Title: </span>{{morelikethisprogramInfo.title}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Genre: </span>{{morelikethisprogramInfo.genre}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Airing Time: </span>{{morelikethisprogramInfo.pgmTime}}  ({{programInfo.pgmDay}})</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Duration: </span>{{morelikethisprogramInfo.duration}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Cast: </span>{{morelikethisprogramInfo.cast}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Audio Type: </span>{{morelikethisprogramInfo.audioType}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+
+
 </section>

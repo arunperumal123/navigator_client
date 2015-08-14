@@ -101,6 +101,12 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
                     // Pass programid
                     return data.getProgramDetails($stateParams.pid);
                 }
+            }],
+            moreLikeThisPrograms: ['$stateParams', 'data', function($stateParams, data){
+                if ($stateParams.pid) {
+                    // Pass programid
+                    return data.getMoreLikeThisPrograms($stateParams.pid);
+                }
             }]
         },
         templateUrl: 'templates/partials/channel/programInfo.tpl.html'
