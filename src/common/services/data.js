@@ -1,5 +1,5 @@
-var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
-//var serverUrl = "http://localhost:9080/";
+//var serverUrl = "https://aqueous-ocean-8272.herokuapp.com/";
+var serverUrl = "http://localhost:9080/";
 var currentDate = new Date();
 var channelDay = currentDate.toISOString().substr(0,10);
 var selectedChannel =null;
@@ -76,21 +76,37 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
         var _url = serverUrl+'authentication/users/new?username='+username+"&firstname="+firstname+"&lastname="+lastname+"&password="+password+"&emailid="+emailid+"&sex="+sex+"&age="+age;
         return $http({method: 'GET', url: _url});
     }
+	
     function postUserUsageDetails(username,programId, date, time, duration){
-        var _url = serverUrl+'epg/usageDetails?user=rovi&?username='+username+"&pgmId="+programId+"&date="+date+"&time="+time+"&duration="+duration;
+        var _url = serverUrl+'epg/usageDetails?user=rovi&username='+username+"&pgmId="+programId+"&date="+date+"&time="+time+"&duration="+duration;
         return $http({method: 'GET', url: _url});
-	}
+    }
+
+    function postCurrentlyWatchedProgramDetails(username,programId, date, time){
+        var _url = serverUrl+'epg/currentlyViewingDetails?user=rovi&username='+username+"&pgmId="+programId+"&date="+date+"&time="+time;
+        return $http({method: 'GET', url: _url});
+    }
+
 	function getMoreLikeThisPrograms(pgmId) {
 		var fromDate = dateTime.getCurrentDate();
 		var utcFromDate = dateTime.getUTCTimeString(fromDate);
 		var toDate = dateTime.addDays(dateTime.getCurrentDate(), 1);
 		var utcToDate = dateTime.getUTCTimeString(toDate);
-
 		var _url = serverUrl+'epg/programs/morelikethis?user=rovi&pgmStartTime=' + utcFromDate + '&pgmEndTime=' + utcToDate+ '&pgmId='+ pgmId;
 		return $http({method: 'GET', url: _url});
 
 	}
 
+	function getRecommendationDetails(username) {
+        var _url = serverUrl+'epg/recommendations?username='+username;
+        return $http({method: 'GET', url: _url});	
+	}
+	
+	function getTrendingnowDetails() {
+        var _url = serverUrl+'epg/trendingnow';
+        return $http({method: 'GET', url: _url});	
+	}
+	
 	return {
 		getChannelList: getChannelList,
 		getProgramList: getProgramList,
@@ -101,6 +117,9 @@ cloudStbApp.factory('data', [ '$http', '$q', 'dateTime', function ($http, $q, da
         userLogin: userLogin,
         registerUser:registerUser,
 		postUserUsageDetails:postUserUsageDetails,
+		postCurrentlyWatchedProgramDetails:postCurrentlyWatchedProgramDetails,
+		getRecommendationDetails: getRecommendationDetails,
+		getTrendingnowDetails: getTrendingnowDetails,
 		getMoreLikeThisPrograms: getMoreLikeThisPrograms
 	};
 }]);

@@ -152,7 +152,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
     });
 
-    // search tab
+    // recommendations tab
     states.push({   name: 'tabs.recommendations',
         url: 'recommendations/',
         views: 
@@ -160,9 +160,38 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 				{ 
 					templateUrl: 'templates/partials/recommendations/recommendations.tpl.html'
 				}
-            }/*,
-		controller: 'searchController'*/
+            },
+		resolve:{
+            recommendationDetails: ['$stateParams', 'data', function($stateParams, data){
+				if(loggedInUser) {
+					return data.getRecommendationDetails(loggedInUser.userName);
+				}
+            }]
+        }/*,
+		controller: 'recommendationsController'*/
+		
     });
+
+    // trendingnow tab
+    states.push({   name: 'tabs.trendingnow',
+        url: 'trendingnow/',
+		controller: 'searchController',
+        views: 
+			{ 'trendingnow@tabs':
+				{ 
+					templateUrl: 'templates/partials/trendingnow/trendingnow.tpl.html'
+				}
+            },
+		resolve:{
+            trendingnowDetails: ['$stateParams', 'data', function($stateParams, data){
+
+		return data.getTrendingnowDetails();
+            }]
+        }/*,
+        controller: 'trendingnowController'*/
+
+    });
+
 
     angular.forEach(states, function(state) { $stateProvider.state(state); });
 

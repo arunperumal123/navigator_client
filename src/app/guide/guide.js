@@ -93,7 +93,6 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		var pgmId = $stateParams.pid;
 		var pgmDate = singleProgram.start_time;
 		var pgmTime = _programInfo.pgmTime;
-		var pgmDuration = 0;
 		
 		if(loggedInUser) {
 			if(watchingProgramDt && watchingProgramDt.id != pgmId) {
@@ -107,7 +106,8 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		}
 	
 		if(loggedInUser) {
-			var postDataTimer = setTimeout(function(){ data.postUserUsageDetails(loggedInUser.userName, pgmId, pgmDate, pgmTime, pgmDuration);  }, 3000);			
+			//var postDataTimer = setTimeout(function(){ data.postCurrentlyWatchedProgramDetails(loggedInUser.userName, pgmId, pgmDate, pgmTime, pgmDuration);  }, 3000);		
+			data.postCurrentlyWatchedProgramDetails(loggedInUser.userName, pgmId, pgmDate, pgmTime); 	
 		}
 	}
 
