@@ -1,7 +1,28 @@
+No trending now details found...
 <section id="TrndingnowSection" class = 'search-results-pgm-info'>
-         <div class="list-pgm">
-			<div class="list-pgm">
-				Trending Now will be available soon...
+	<div class='search-results' ng-if= "trendingnowDetails">
+		<span href="#" class="list-group-item  search-results-title">
+		   <h4 class="list-group-item-heading" style='color:#ffffff;'>Search Results</h4>
+		</span>
+		<div ng-if= "trendingnowDetails">
+			<div class="search-results-container">
+				<div class="col-md-12" ng-repeat="programList in trendingnowDetails">
+					<a ui-sref=".searchResultsInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
+						<span style='width:200px;'  class="search-results-item-title">
+							Channel  {{programList.channel_index}}
+						</span>	
+						
+						<span style='width:400px;' class="search-results-item-title">
+							{{programList.title}}
+						</span>				
+					</a>
+				</div>
 			</div>
-		</div>
+		</div>	
+	</div>
+	<div ng-if="trendingnowDetails.length==0">
+		<a class="list-group-item">
+			No trending now details found...
+        </a>
+	</div>
 </section>

@@ -155,29 +155,32 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     // recommendations tab
     states.push({   name: 'tabs.recommendations',
         url: 'recommendations/',
+
+		controller: 'recommendationController',
+
+
+		resolve:{
+            recommendationDetails: ['$stateParams', 'data', function($stateParams, data){
+				if(loggedInUser) {		
+					return data.getRecommendationDetails(loggedInUser.userName);
+				}
+            }]
+        },
         views: 
-			{ 'recommendations@tabs':
+			{ 'recommendationstab@tabs':
 				{ 
 					templateUrl: 'templates/partials/recommendations/recommendations.tpl.html'
 				}
             },
-		resolve:{
-            recommendationDetails: ['$stateParams', 'data', function($stateParams, data){
-				if(loggedInUser) {
-					return data.getRecommendationDetails(loggedInUser.userName);
-				}
-            }]
-        }/*,
-		controller: 'recommendationsController'*/
-		
+				
     });
 
     // trendingnow tab
     states.push({   name: 'tabs.trendingnow',
         url: 'trendingnow/',
-		controller: 'searchController',
+		controller: 'trendingnowController',
         views: 
-			{ 'trendingnow@tabs':
+			{ 'trendingnowtab@tabs': 
 				{ 
 					templateUrl: 'templates/partials/trendingnow/trendingnow.tpl.html'
 				}
@@ -185,11 +188,9 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 		resolve:{
             trendingnowDetails: ['$stateParams', 'data', function($stateParams, data){
 
-		return data.getTrendingnowDetails();
+			    return data.getTrendingnowDetails();
             }]
-        }/*,
-        controller: 'trendingnowController'*/
-
+        }
     });
 
 

@@ -192,7 +192,7 @@ cloudStbApp.controller('searchController', ['$scope', '$state' , function ($scop
 	};
 }]);
 
-cloudStbApp.controller('searchResultsController', ['$scope', 'searchData', 'VideoPlayer', function ($scope, searchData, VideoPlayer) {
+cloudStbApp.controller('searchResultsController', ['$scope', 'searchData',  function ($scope, searchData) {
 	$scope.searchData = searchData.data;
 }]);
 
@@ -294,6 +294,15 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
         });
     };
 }]);
+
+cloudStbApp.controller('recommendationController', ['$scope', 'recommendationDetails', function ($scope, recommendationDetails) {
+	$scope.recommendationDetails = recommendationDetails.data;
+}]);
+
+cloudStbApp.controller('trendingnowController', ['$scope', 'trendingnowDetails',  function ($scope, trendingnowDetails) {
+	$scope.trendingnowDetails = trendingnowDetails.data;
+}]);
+
 
 cloudStbApp.controller('tabsController', ['$scope', 'data', '$stateParams', function ($scope, data, $stateParams) {
 
