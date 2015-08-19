@@ -156,9 +156,6 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     states.push({   name: 'tabs.recommendations',
         url: 'recommendations/',
 
-		controller: 'recommendationController',
-
-
 		resolve:{
             recommendationDetails: ['$stateParams', 'data', function($stateParams, data){
 				if(loggedInUser) {		
@@ -169,7 +166,8 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
         views: 
 			{ 'recommendationstab@tabs':
 				{ 
-					templateUrl: 'templates/partials/recommendations/recommendations.tpl.html'
+					templateUrl: 'templates/partials/recommendations/recommendations.tpl.html',
+					controller: 'recommendationController'
 				}
             },
 				
@@ -178,11 +176,12 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
     // trendingnow tab
     states.push({   name: 'tabs.trendingnow',
         url: 'trendingnow/',
-		controller: 'trendingnowController',
         views: 
 			{ 'trendingnowtab@tabs': 
 				{ 
-					templateUrl: 'templates/partials/trendingnow/trendingnow.tpl.html'
+					templateUrl: 'templates/partials/trendingnow/trendingnow.tpl.html',
+					controller: 'trendingnowController'
+					
 				}
             },
 		resolve:{

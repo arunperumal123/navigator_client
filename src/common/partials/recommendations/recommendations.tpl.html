@@ -1,14 +1,12 @@
-			No Recommendation details found...
-
 <section id="RecommendationSection" class = 'search-results-pgm-info'>
 	<div class='search-results' ng-if= "recommendationDetails">
 		<span href="#" class="list-group-item  search-results-title">
-		   <h4 class="list-group-item-heading" style='color:#ffffff;'>Search Results</h4>
+		   <h4 class="list-group-item-heading" style='color:#ffffff;'>Recommended Programs</h4>
 		</span>
-		<div ng-if= "trendingnowDetails">
+		<div ng-if= "recommendationDetails">
 			<div class="search-results-container">
 				<div class="col-md-12" ng-repeat="programList in recommendationDetails">
-					<a ui-sref=".searchResultsInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
+					<a ui-sref=".recommendationsInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
 						<span style='width:200px;'  class="search-results-item-title">
 							Channel  {{programList.channel_index}}
 						</span>	
@@ -23,7 +21,8 @@
 	</div>
 	<div ng-if="recommendationDetails.length==0">
 		<a class="list-group-item">
-			No Recommendation details found...
+			Recommended programs not available....
         </a>
 	</div>
 </section>
+<div ui-view></div>

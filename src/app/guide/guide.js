@@ -296,11 +296,15 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
 }]);
 
 cloudStbApp.controller('recommendationController', ['$scope', 'recommendationDetails', function ($scope, recommendationDetails) {
-	$scope.recommendationDetails = recommendationDetails.data;
+	if(recommendationDetails && recommendationDetails.data) {
+		$scope.recommendationDetails = recommendationDetails.data;
+	} else {
+		$scope.recommendationDetails = new Array();
+	}
 }]);
 
 cloudStbApp.controller('trendingnowController', ['$scope', 'trendingnowDetails',  function ($scope, trendingnowDetails) {
-	$scope.trendingnowDetails = trendingnowDetails.data;
+	$scope.trendingnowDetails = (trendingnowDetails.data)?trendingnowDetails.data: new Array();
 }]);
 
 
