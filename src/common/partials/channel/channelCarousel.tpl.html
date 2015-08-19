@@ -3,7 +3,7 @@
 		<div class="my-slide" ng-repeat="channel in channelList" >
 			<a ui-sref=".channel({cid: channel.channel_number})"  >
 				<div class="channel-item" id="channel_container_{{channel.channel_number}}">
-					<div> Channel {{channel.channel_number}}</div>
+					<div> {{channel.channel_number}}</div>
 					<div>{{channel.channel_name}}</div>
 				</div>
 			</a>			

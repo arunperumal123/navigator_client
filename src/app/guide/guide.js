@@ -52,7 +52,7 @@ cloudStbApp.controller('programController', ['$scope', 'data', '$stateParams', '
 		//Implement logic for playing the video
     }
 }]);
-cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams', 'programList', 'VideoPlayer' , 'dateTime' , function ($scope, data, $stateParams, programList, VideoPlayer, dateTime) {
+cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams', 'programList','moreLikeThisPrograms','VideoPlayer' , 'dateTime' , function ($scope, data, $stateParams, programList,moreLikeThisPrograms, VideoPlayer, dateTime) {
 
 
 	var singleProgram = programList.data;
@@ -93,7 +93,6 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		var pgmId = $stateParams.pid;
 		var pgmDate = singleProgram.start_time;
 		var pgmTime = _programInfo.pgmTime;
-		var pgmDuration = 0;
 		
 		if(loggedInUser) {
 			if(watchingProgramDt && watchingProgramDt.id != pgmId) {
@@ -107,7 +106,8 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 		}
 	
 		if(loggedInUser) {
-			var postDataTimer = setTimeout(function(){ data.postUserUsageDetails(loggedInUser.userName, pgmId, pgmDate, pgmTime, pgmDuration);  }, 3000);			
+			//var postDataTimer = setTimeout(function(){ data.postCurrentlyWatchedProgramDetails(loggedInUser.userName, pgmId, pgmDate, pgmTime, pgmDuration);  }, 3000);		
+			data.postCurrentlyWatchedProgramDetails(loggedInUser.userName, pgmId, pgmDate, pgmTime); 	
 		}
 	}
 
@@ -137,7 +137,48 @@ cloudStbApp.controller('programInfoController', ['$scope', 'data', '$stateParams
 	
 	selectedChannel = $stateParams.cid;   
 	selectedProgram = $stateParams.pid;
-	
+
+	$scope.IsProgInfo = true;
+	$scope.progInfo = function () {
+		$scope.IsProgInfo = true;
+		$scope.IsMoreLikeThis = false;
+		$scope.IsMoreLikeThisProgInfo =false;
+	};
+
+	$scope.moreLikeThis = function () {
+		$scope.IsProgInfo = false;
+		$scope.IsMoreLikeThisProgInfo =false;
+		$scope.IsMoreLikeThis = true;
+		$scope.moreLikeThisPrograms=moreLikeThisPrograms.data;
+
+	};
+
+	$scope.MoreLikeThisProgInfo= function (pid) {
+		var _programInfo = {};
+		var res = data.getProgramDetails(pid);
+		res.success(function (dataResult) {
+			var singleProgram = dataResult;
+
+			_programInfo.audioType = singleProgram.audio_type;
+			_programInfo.cast = singleProgram.cast;
+			_programInfo.title = singleProgram.title;
+			_programInfo.genre = singleProgram.genre;
+
+			var startTime = dateTime.getDateObj(singleProgram.start_time);
+			var endTime = dateTime.getDateObj(singleProgram.end_time);
+
+			_programInfo.duration =  dateTime.getProgramDuration(startTime, endTime);
+			_programInfo.pgmTime = dateTime.getProgramAiringTime(singleProgram.start_time, singleProgram.end_time);
+			_programInfo.pgmDay = dateTime.getDateString(startTime);
+
+			$scope.morelikethisprogramInfo = _programInfo;
+		}).error(function () {
+			alert("No Prog Info Found");
+		});
+
+
+		$scope.IsMoreLikeThisProgInfo =true;
+	}
 }]);
 
 cloudStbApp.controller('searchController', ['$scope', '$state' , function ($scope, $state) {
@@ -151,7 +192,7 @@ cloudStbApp.controller('searchController', ['$scope', '$state' , function ($scop
 	};
 }]);
 
-cloudStbApp.controller('searchResultsController', ['$scope', 'searchData', 'VideoPlayer', function ($scope, searchData, VideoPlayer) {
+cloudStbApp.controller('searchResultsController', ['$scope', 'searchData',  function ($scope, searchData) {
 	$scope.searchData = searchData.data;
 }]);
 
@@ -253,6 +294,19 @@ cloudStbApp.controller('userAuthRegisterController', ['$scope', 'data', '$stateP
         });
     };
 }]);
+
+cloudStbApp.controller('recommendationController', ['$scope', 'recommendationDetails', function ($scope, recommendationDetails) {
+	if(recommendationDetails && recommendationDetails.data) {
+		$scope.recommendationDetails = recommendationDetails.data;
+	} else {
+		$scope.recommendationDetails = new Array();
+	}
+}]);
+
+cloudStbApp.controller('trendingnowController', ['$scope', 'trendingnowDetails',  function ($scope, trendingnowDetails) {
+	$scope.trendingnowDetails = (trendingnowDetails.data)?trendingnowDetails.data: new Array();
+}]);
+
 
 cloudStbApp.controller('tabsController', ['$scope', 'data', '$stateParams', function ($scope, data, $stateParams) {
 
