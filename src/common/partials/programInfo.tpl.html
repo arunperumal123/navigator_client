@@ -1,0 +1,38 @@
+<section id="searchResultsDtSection" class = 'search-results-pgm-info'>
+    <div class="col-md-6">
+         <div class="list-pgm">
+			<div class="list-pgm">
+			   <span class="list-pgm-item list-pgm-item-head">
+				   <h4 class="list-pgm-item-heading" >Program Info</h4>
+				</span>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Title: </span>{{programInfo.title}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Genre: </span>{{programInfo.genre}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Airing Time: </span>{{programInfo.pgmTime}}  ({{programInfo.pgmDay}})</span>
+				</p>				
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Duration: </span>{{programInfo.duration}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Cast: </span>{{programInfo.cast}}</span>
+				</p>
+				<p class="list-pgm-item">
+					<span><span class='list-pgm-item-text-heading'>Audio Type: </span>{{programInfo.audioType}}</span>
+				</p>
+			</div>
+     </div>
+   </div>
+   <div class="col-md-6">
+        <div class="list-pgm pgm-image-container">
+            <span class="list-pgm-item  pgm-poster">
+                <!--<img ng-src="/dist/assets/posters/{{programInfo.img}}" width="100%" />-->
+						<video  class='pgm-mini-video' preload="auto" id="bgvid-1">
+						</video>
+            </span>
+        </div>
+    </div>
+</section>

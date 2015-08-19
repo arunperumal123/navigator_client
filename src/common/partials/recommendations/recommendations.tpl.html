@@ -6,7 +6,7 @@
 		<div ng-if= "recommendationDetails">
 			<div class="search-results-container">
 				<div class="col-md-12" ng-repeat="programList in recommendationDetails">
-					<a ui-sref=".recommendationsInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
+					<a ui-sref=".recommendationInfo({pid: programList.program_id})" class="list-group-item search-results-item" >
 						<span style='width:200px;'  class="search-results-item-title">
 							Channel  {{programList.channel_index}}
 						</span>	
@@ -25,4 +25,6 @@
         </a>
 	</div>
 </section>
+<br/> <br/>
+
 <div ui-view></div>

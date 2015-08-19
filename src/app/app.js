@@ -149,7 +149,7 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
                 }
             }]
         },
-        templateUrl: 'templates/partials/search/searchResultsInfo.tpl.html'
+        templateUrl: 'templates/partials/programInfo.tpl.html'
     });
 
     // recommendations tab
@@ -173,6 +173,20 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 				
     });
 
+    states.push({ name: 'tabs.recommendations.recommendationInfo',
+        url: '/recommendationInfo/:pid',
+        controller: 'searchResultsInfoController',
+		resolve:{
+            programDetails: ['$stateParams', 'data', function($stateParams, data){
+                if ($stateParams.pid) {
+                    return data.getProgramDetails($stateParams.pid, $stateParams.aTime);
+                }
+            }]
+        },
+        templateUrl: 'templates/partials/programInfo.tpl.html'
+    });
+
+
     // trendingnow tab
     states.push({   name: 'tabs.trendingnow',
         url: 'trendingnow/',
@@ -190,6 +204,19 @@ cloudStbApp.config(function($stateProvider, $stickyStateProvider, $urlRouterProv
 			    return data.getTrendingnowDetails();
             }]
         }
+    });
+	
+    states.push({ name: 'tabs.trendingnow.trendingnowInfo',
+        url: '/trendingnowInfo/:pid',
+        controller: 'searchResultsInfoController',
+		resolve:{
+            programDetails: ['$stateParams', 'data', function($stateParams, data){
+                if ($stateParams.pid) {
+                    return data.getProgramDetails($stateParams.pid, $stateParams.aTime);
+                }
+            }]
+        },
+        templateUrl: 'templates/partials/programInfo.tpl.html'
     });
 
 
